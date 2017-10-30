@@ -1,5 +1,8 @@
 # Version files from Virtual Studio
 .vs/*
+/packages/*
+/StudentAccom/bin/*
+/StudentAccom/obj/*
 
 # Compiled source #
 *.com
@@ -18,9 +21,7 @@
 *.rar
 *.tar
 *.zip
-/packages/*
-/StudentAccom/bin/*
-/StudentAccom/obj/*
+
 
 # Logs and databases #
 *.log
