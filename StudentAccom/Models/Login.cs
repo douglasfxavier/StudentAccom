@@ -5,8 +5,8 @@ using System.Web;
 
 namespace StudentAccom.Models {
     public class Login {
-        public User user;
-        public string login { set; get; }
-        public string password { set; get; }
+        public User User;
+        public string Login { set; get; }
+        public string Password { set; get; }
     }
 }

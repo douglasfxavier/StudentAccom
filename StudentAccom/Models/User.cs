@@ -5,8 +5,8 @@ using System.Web;
 
 namespace StudentAccom.Models {
     public class User {
-        public int îd { get; set; }
-        public string name { get; set; }
-        public Role role { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public Role Role { get; set; }
     }
 }

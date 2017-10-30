@@ -5,7 +5,7 @@ using System.Web;
 
 namespace StudentAccom.Models {
     public class Role {
-        public int id { set; get; }
-        public string description { set; get; }
+        public int ID { set; get; }
+        public string Description { set; get; }
     }
 }
