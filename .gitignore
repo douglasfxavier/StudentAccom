@@ -19,8 +19,8 @@
 *.tar
 *.zip
 /packages/*
-/bin/*
-/obj/*
+/StudentAccom/bin/*
+/StudentAccom/obj/*
 
 # Logs and databases #
 *.log
