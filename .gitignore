@@ -20,7 +20,7 @@
 *.zip
 /packages/*
 /bin/*
-/debug/*
+/obj/*
 
 # Logs and databases #
 *.log
