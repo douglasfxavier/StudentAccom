@@ -1,0 +1,21 @@
+﻿@model StudentAccom.Models.User[]
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        @foreach(var u in @Model) {
+            @u.ID <br>
+            @u.Name <br>
+        }
+    </div>
+</body>
+</html>
