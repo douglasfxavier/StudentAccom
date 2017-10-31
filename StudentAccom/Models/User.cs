@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace StudentAccom.Models {
     public class User {
+        [HiddenInput(DisplayValue = false)]
+        [Key]
         public int ID { get; set; }
+        [Required]
         public string Name { get; set; }
-        public Role Role { get; set; }
-    }
-
-    public class UserContext : DbContext {
-        public UserContext() : base(){}
-        public DbSet<User> StudentAccomDB { set; get; }
+        public int? RoleID { get; set; }
+        public virtual Role UserRole { get; set; }
     }
 }
