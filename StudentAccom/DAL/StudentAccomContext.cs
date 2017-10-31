@@ -10,5 +10,7 @@ namespace StudentAccom.DAL {
     public class StudentAccomContext : DbContext {
         public StudentAccomContext() : base("StudentAccomDB") { }
         public DbSet<User> UsersDB { set; get; }
+        public DbSet<Accommodation> AccommodationsDB { set; get; }
+        
     }
 }

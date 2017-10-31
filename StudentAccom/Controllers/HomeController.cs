@@ -20,6 +20,7 @@ namespace StudentAccom.Controllers
             Context = new StudentAccomContext();
         
             UsersDB = Context.UsersDB;
+        
             UsersDB.Add(new User { ID = 1, Name = "Douglas" });
             Context.SaveChanges();
             Users = UsersDB.ToArray();

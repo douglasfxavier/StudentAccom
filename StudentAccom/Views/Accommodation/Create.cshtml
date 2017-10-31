@@ -1,0 +1,21 @@
+﻿@model StudentAccom.Models.Accommodation
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    @using (Html.BeginForm("Create", "Accommodation")){
+        <div class="accommodation-form">
+            @Html.EditorForModel()
+            <input type="submit" value="Submit" />
+        </div>
+    }
+</body>
+</html>
