@@ -4,6 +4,6 @@ Project developed as an assignment for the module Web Development in the MSc Web
 
 Team:
 * Douglas Xavier
-* Autumun Huang
+* Autumn Huang
 
 2017
