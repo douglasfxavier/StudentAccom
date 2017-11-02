@@ -45,15 +45,21 @@ namespace StudentAccom.Controllers
         }
 
         //This method loads the Details page of a Accommodation related to a given ID
-        [Route("Accommodation/Details")]
+        [Route("Accommodation/Details/{id:int}")]
         public ActionResult Details(int? id) {
+
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            Context = new StudentAccomContext();
+            AccommodationsDB = Context.AccommodationsDB;
             Accommodation accom = AccommodationsDB.Find(id);
+
             if (accom == null) {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             return View(accom);
         }
     }

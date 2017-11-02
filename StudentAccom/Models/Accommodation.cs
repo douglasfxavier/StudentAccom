@@ -55,7 +55,6 @@ namespace StudentAccom.Models
         public bool Pets { set; get; }
         public bool Parties { set; get; }
         public bool CommercialActivities { set; get; }
-
-
     }
+
 }

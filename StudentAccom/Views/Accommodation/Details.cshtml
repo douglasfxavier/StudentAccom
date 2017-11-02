@@ -12,15 +12,18 @@
 </head>
 <body>
     <div> 
+            <h1>@Model.Title</h1>
+            <p>@Model.Description</p>
             <table>
                 <tbody>
                     <tr>
-                        <td></td>
+                        @if (@Model.Internet) {
+                                <td><span><img src="~/Images/internet-icon.png" />Internet</span></td>
+                        }
+
                     </tr>
                 </tbody>
             </table>
-
-        }
     </div>
 </body>
 </html>
