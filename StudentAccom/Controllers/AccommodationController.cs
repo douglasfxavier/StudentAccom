@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using StudentAccom.Models;
 using StudentAccom.DAL;
 using System.Data.Entity;
+using System.Net;
 
 namespace StudentAccom.Controllers
 {
@@ -41,6 +42,19 @@ namespace StudentAccom.Controllers
         [Route("Accommodation/Success")]
         public ViewResult CreateSuccess(Accommodation a){
             return View(a);
+        }
+
+        //This method loads the Details page of a Accommodation related to a given ID
+        [Route("Accommodation/Details")]
+        public ActionResult Details(int? id) {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Accommodation accom = AccommodationsDB.Find(id);
+            if (accom == null) {
+                return HttpNotFound();
+            }
+            return View(accom);
         }
     }
 }

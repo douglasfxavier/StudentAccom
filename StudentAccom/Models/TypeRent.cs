@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 
 namespace StudentAccom.Models {
-    public enum Role {
-        AccommodationOfficer, Student, Landlord
+    public enum TypeRent {
+        Daily, Weekly, Monthly, Yearly
     }
 }

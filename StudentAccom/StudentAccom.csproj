@@ -132,6 +132,8 @@
     <Compile Include="Models\AccomReview.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\TypeAccom.cs" />
+    <Compile Include="Models\TypeRent.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -147,6 +149,8 @@
     <Content Include="Scripts\jquery-3.2.1.min.map" />
     <Content Include="Views\Accommodation\Create.cshtml" />
     <Content Include="Views\Accommodation\CreateSuccess.cshtml" />
+    <Content Include="Views\Accommodation\Edit.cshtml" />
+    <Content Include="Views\Accommodation\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

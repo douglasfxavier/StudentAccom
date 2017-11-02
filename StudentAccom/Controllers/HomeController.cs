@@ -21,7 +21,7 @@ namespace StudentAccom.Controllers
         
             UsersDB = Context.UsersDB;
         
-            UsersDB.Add(new User { ID = 1, Name = "Douglas" });
+            UsersDB.Add(new User { ID = 1, Name = "Douglas", Role = Role.Student});
             Context.SaveChanges();
             Users = UsersDB.ToArray();
         }

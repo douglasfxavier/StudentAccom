@@ -9,8 +9,7 @@ namespace StudentAccom.Models {
         public int ID { get; set; }
         [Required]
         public string Name { get; set; }
-        public int? RoleID { get; set; }
-        public virtual Role UserRole { get; set; }
+        public Role Role { set; get; }
         public virtual ICollection<Accommodation> Accommodations { set; get; } 
     }
 }
