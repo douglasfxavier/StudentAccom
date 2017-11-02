@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace StudentAccom.Models {
@@ -10,5 +11,6 @@ namespace StudentAccom.Models {
         public string Name { get; set; }
         public int? RoleID { get; set; }
         public virtual Role UserRole { get; set; }
+        public virtual ICollection<Accommodation> Accommodations { set; get; } 
     }
 }
