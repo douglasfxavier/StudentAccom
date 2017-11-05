@@ -5,6 +5,9 @@ using System.Web;
 
 namespace StudentAccom.Models {
     public enum TypeRent {
-        Daily, Weekly, Monthly, Yearly
+        Daily,
+        Weekly,
+        Monthly,
+        Yearly
     }
 }

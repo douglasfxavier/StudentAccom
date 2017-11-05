@@ -27,15 +27,20 @@ namespace StudentAccom.Controllers
         [HttpPost]
         //This method does the validation checks and post the values from and, when there's no erros, persist the data into the database
         public ActionResult Create(Accommodation a){
-            Context = new StudentAccomContext();
+            if (ModelState.IsValid) {
+                Context = new StudentAccomContext();
+                AccommodationsDB = Context.AccommodationsDB;
+                AccommodationsDB.Add(a);
+                Context.SaveChanges();
+                Accommodations = AccommodationsDB.ToArray();
 
-            AccommodationsDB = Context.AccommodationsDB;
-            AccommodationsDB.Add(a);
-            Context.SaveChanges();
-            Accommodations = AccommodationsDB.ToArray();
+                //This statement is the redirect action, as part of PRG (Post-Redirect-Get)
+                return RedirectToAction("CreateSuccess", a);
+            } else {
+                return View();
+            }
 
-            //This statement is the redirect action, as part of PRG (Post-Redirect-Get)
-            return RedirectToAction("CreateSuccess", a);
+
         }
 
         //This method loads the view with a successful message 
