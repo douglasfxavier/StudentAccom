@@ -52,8 +52,8 @@ namespace StudentAccom.Models
         public bool SharedBathroom { set; get; }
         public bool Heating { set; get; }
         public bool AirConditioning { set; get; }
-        public bool WasherMachine { set; get; }
-        public bool DryerMachine { set; get; }
+        public bool WashingMachine { set; get; }
+        public bool DryingMachine { set; get; }
         public bool Pool { set; get; }
         public bool Gym { set; get; }
 
