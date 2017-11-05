@@ -5,6 +5,8 @@ using System.Web;
 
 namespace StudentAccom.Models {
     public enum TypeAccom {
-        House, Flat, Room
+        House,
+        Flat,
+        Room
     }
 }

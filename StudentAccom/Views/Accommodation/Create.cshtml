@@ -1,4 +1,5 @@
 ﻿@model StudentAccom.Models.Accommodation
+
 @{
     Layout = null;
 }
@@ -11,10 +12,127 @@
     <title>Create</title>
 </head>
 <body>
+    @Html.ValidationSummary()
     @using (Html.BeginForm("Create", "Accommodation")){
         <div class="accommodation-form">
-            @Html.EditorForModel()
-            <input type="submit" value="Submit" />
+            <section title="Basic information about the accommodation">
+                <h1>Basic information</h1>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Title</td>
+                            <td>@Html.EditorFor(model => model.Title)</td>
+                        </tr>
+                        <tr>
+                            <td>Type of accommmodation</td>
+                            <td>@Html.EnumDropDownListFor(model => model.TypeAccom)</td>
+                        </tr>
+                        <tr>
+                            <td>Description</td>
+                            <td>@Html.EditorFor(model => model.Description)</td>
+                        </tr>
+                        <tr>
+                            <td>Location</td>
+                            <td>@Html.EditorFor(model => model.Location)</td>
+                        </tr>
+                        <tr>
+                            <td>Number of rooms</td>
+                            <td>@Html.EditorFor(model => model.RoomsNumber)</td>
+                        </tr>
+                        <tr>
+                            <td>Price</td>
+                            <td>@Html.EditorFor(model => model.Price)</td>
+                        </tr>
+                        <tr>
+                            <td>Type of rent</td>
+                            <td>@Html.EnumDropDownListFor(model => model.TypeRent)</td>
+                        </tr>
+                        <tr>
+                            <td>Cleaning fee</td>
+                            <td>@Html.EditorFor(model => model.CleaningFee)</td>
+                        </tr>
+                        <tr>
+                            <td>Security deposit</td>
+                            <td>@Html.EditorFor(model => model.SecurityDeposit)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section title="Additional features in the accommodation">
+                <h1>Features</h1>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>@Html.EditorFor(model => model.Internet) Internet</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(model => model.Wifi) Wi-fi</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(model => model.CableTV) Cable TV</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(model => model.TV) TV</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(model => model.Doorman) Doorman</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(model => model.Kitchen) Kitchen</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(model => model.IndividualBathroom) Individual bathroom</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(model => model.SharedBathroom) Shared b athroom</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(model => model.Heating) Heating</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(model => model.AirConditioning) Air Conditioning</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(model => model.WasherMachine) Washer machine</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(model => model.DryerMachine) Dryer machine</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(model => model.Pool) Pool</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(model => model.Gym) Gym</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section title="Permitted items">
+                <h1>Permitted items and activities</h1>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>@Html.EditorFor(model => model.Smoking) Smoking</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(model => model.Pets) Pets</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(model => model.Parties) Parties</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.EditorFor(model => model.CommercialActivities) Commercial activities</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="reset" value="Clear" />
+                                <input type="submit" value="Submit" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
         </div>
     }
 </body>
