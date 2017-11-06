@@ -14,7 +14,7 @@
 </head>
 <body>
     @Html.ValidationSummary()
-    @using (Html.BeginForm("Create", "Accommodation")){
+    @using (Html.BeginForm("Create", "Accommodation", FormMethod.Post, new {enctype = "multipart/form-data" })){
         <div class="accommodation-form">
             <section title="Basic information about the accommodation">
                 <h1>Basic information</h1>
@@ -123,6 +123,9 @@
                         </tr>
                         <tr>
                             <td>@Html.EditorFor(model => model.CommercialActivities) Commercial activities</td>
+                        </tr>
+                        <tr>
+                            <td><input type="file" multiple name="SelectedImages"/></td>
                         </tr>
                         <tr>
                             <td></td>

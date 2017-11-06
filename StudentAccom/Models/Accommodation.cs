@@ -33,7 +33,7 @@ namespace StudentAccom.Models
         //Not required fields
         public float CleaningFee { set; get; }
         public float SecurityDeposit { set; get; }
-        public Byte[] Photo { set; get; }
+        //public Image[] Images{ set; get; }
 
         //Relationship with the class/table User. It record the user Landlord who creates the Accommodation        //Relationship with the class/table User. It record the user Landlord who creates the Accommodation advertisement 
       
@@ -62,6 +62,7 @@ namespace StudentAccom.Models
         public bool Pets { set; get; }
         public bool Parties { set; get; }
         public bool CommercialActivities { set; get; }
+
 
     }
 }
