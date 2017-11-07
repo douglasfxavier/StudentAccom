@@ -14,11 +14,13 @@ namespace StudentAccom.Controllers
     {
         private StudentAccomContext Context;
         private DbSet<Accommodation> AccommodationsDB;
-        private Accommodation[] Accommodations;
+        private DbSet<Image> ImagesDB;
+        //private Accommodation[] Accommodations;
+        //private Image[] Images;
 
         [Route("Accommodation/Create")]
         [HttpGet]
-        //This method load the view with the form to create a new Accommodation advertsiment
+        //This method load the view with the form to create a new Accommodation advertisement
         public ViewResult Create() {
             return View();
         }
@@ -26,14 +28,30 @@ namespace StudentAccom.Controllers
         [Route("Accommodation/Create")]
         [HttpPost]
         //This method does the validation checks and post the values from and, when there's no erros, persist the data into the database
-        public ActionResult Create(Accommodation a){
+        public ActionResult Create(Accommodation a, HttpPostedFileBase[] SelectedImages) {
             if (ModelState.IsValid) {
                 Context = new StudentAccomContext();
                 AccommodationsDB = Context.AccommodationsDB;
+                ImagesDB = Context.ImagesDB;
                 AccommodationsDB.Add(a);
-                Context.SaveChanges();
-                Accommodations = AccommodationsDB.ToArray();
 
+                //Persistence of images into the database
+                if (SelectedImages != null) { 
+                    foreach (var file in SelectedImages) {
+                        Image img = new Image {
+                            Accommodation = a,
+                            ImageData = new byte[file.ContentLength],
+                            MimeType = file.ContentType
+                        };
+                        file.InputStream.Read(img.ImageData, 0, img.ImageData.Length);
+                        ImagesDB.Add(img);
+                        
+                    }
+                    
+                }
+
+                Context.SaveChanges();
+                
                 //This statement is the redirect action, as part of PRG (Post-Redirect-Get)
                 return RedirectToAction("CreateSuccess", a);
             } else {
