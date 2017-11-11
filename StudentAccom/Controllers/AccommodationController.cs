@@ -53,12 +53,10 @@ namespace StudentAccom.Controllers
                 Context.SaveChanges();
                 
                 //This statement is the redirect action, as part of PRG (Post-Redirect-Get)
-                return RedirectToAction("CreateSuccess", a);
+                return RedirectToAction("CreateSuccess",a);
             } else {
                 return View();
             }
-
-
         }
 
         //This method loads the view with a successful message 
@@ -85,5 +83,17 @@ namespace StudentAccom.Controllers
 
             return View(accom);
         }
+
+
+        [Route("Accommodation/Edit/{id:int}")]
+        [HttpGet]
+        //This method load the view with the form to create a new Accommodation advertisement
+        public ActionResult Edit(int ID) {
+            Context = new StudentAccomContext();
+            AccommodationsDB = Context.AccommodationsDB;
+            Accommodation a = AccommodationsDB.Find(ID);
+            return View(a);
+        }
     }
+
 }

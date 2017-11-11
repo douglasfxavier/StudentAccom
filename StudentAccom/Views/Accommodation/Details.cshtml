@@ -12,56 +12,64 @@
 </head>
 <body>
     <div> 
-            <h1>@Model.Title</h1>
-            <p>@Model.Description</p>
-            <table>
-                <tbody>
-                    <tr>
-                        @if (@Model.Internet) {
-                                <td><span><img src="~/Images/internet-icon.png" alt="Internet icon"/>   Internet</span></td>
-                        }
-                        @if (@Model.Wifi) {
-                            <td><span><img src="~/Images/wifi-icon.png" alt="Wi-fi icon"/>   Wi-fi</span></td>
-                        }
-                        @if (@Model.CableTV) {
-                            <td><span><img src="~/Images/cable-tv-icon.png" alt="Cable TV icon" />   Cable TV</span></td>
-                        }
-                        @if (@Model.TV) {
-                            <td><span><img src="~/Images/tv-icon.png" alt="TV icon" />   TV</span></td>
-                            }
-                        @if (@Model.Doorman) {
-                            <td><span><img src="~/Images/doorman-icon.png" alt="Doorman icon" />   Doorman</span></td>
-                            }
-                        @if (@Model.Kitchen) {
-                            <td><span><img src="~/Images/kitchen-icon.png" alt="Kitchen icon" />   Kitchen</span></td>
-                            }
-                        @if (@Model.IndividualBathroom) {
-                            <td><span><img src="~/Images/bathroom-icon.png" alt="Bathroom icon" />   Individual bathroom</span></td>
-                            }
-                        @if (@Model.SharedBathroom) {
-                            <td><span><img src="~/Images/bathroom-icon.png" alt="Bathroom icon" />   Shared bathroom</span></td>
-                            }
-                        @if (@Model.Heating) {
-                            <td><span><img src="~/Images/heating-icon.png" alt="Heating icon" />   Heating</span></td>
-                            }
-                        @if (@Model.AirConditioning) {
-                            <td><span><img src="~/Images/air-conditioning-icon.png" alt="Air-conditioning icon" />   Air-conditioning</span></td>
-                            }
-                        @if (@Model.WashingMachine) {
-                            <td><span><img src="~/Images/washing-machine-icon.png" alt="Washing machine icon" />   Washing machine</span></td>
-                            }
-                        @if (@Model.DryingMachine) {
-                            <td><span><img src="~/Images/drying-machine-icon.png" alt="Drying machine icon" />   Drying machine</span></td>
-                            }
-                        @if (@Model.Pool) {
-                            <td><span><img src="~/Images/pool-icon.png" alt="Pool icon" />   Pool</span></td>
-                            }
-                        @if (@Model.Gym) {
-                            <td><span><img src="~/Images/gym-icon.png" alt="Gym icon" />   Gym</span></td>
-                            }
-                    </tr>
-                </tbody>
-            </table>
+
+        <section title="Basic information about the accommodation">
+            <h1>Basic information</h1>
+            <h2><strong>@Model.Title</strong></h2>
+            <p>Type of accommodation: @Model.TypeAccom</p>
+            <p>Description: @Model.Description</p>
+            <p>Location: @Model.Location</p>
+            <p>Price: @Model.Price</p>
+            <p>Type of rent: @Model.TypeRent</p>
+            <p>Cleaning fee: @Model.CleaningFee</p>
+            <p>Security deposit: @Model.SecurityDeposit</p>
+        </section>
+
+        <section title="Additional features in the accommodation">
+            @if (@Model.Internet) {
+                <p><span><img src="~/Images/internet-icon.png" alt="Internet icon" />   Internet</span></p>
+            }
+            @if (@Model.Wifi) {
+                <p><span><img src="~/Images/wifi-icon.png" alt="Wi-fi icon" />   Wi-fi</span></p>
+            }
+            @if (@Model.CableTV) {
+                <p><span><img src="~/Images/cable-tv-icon.png" alt="Cable TV icon" />   Cable TV</span></p>
+            }
+            @if (@Model.TV) {
+                <p><span><img src="~/Images/tv-icon.png" alt="TV icon" />   TV</span></p>
+            }
+            @if (@Model.Doorman) {
+                <td><span><img src="~/Images/doorman-icon.png" alt="Doorman icon" />   Doorman</span></td>
+            }
+            @if (@Model.Kitchen) {
+                <p><span><img src="~/Images/kitchen-icon.png" alt="Kitchen icon" />   Kitchen</span></p>
+            }
+            @if (@Model.IndividualBathroom) {
+                <td><span><img src="~/Images/bathroom-icon.png" alt="Bathroom icon" />   Individual bathroom</span></td>
+            }
+            @if (@Model.SharedBathroom) {
+                <td><span><img src="~/Images/bathroom-icon.png" alt="Bathroom icon" />   Shared bathroom</span></td>
+            }
+            @if (@Model.Heating) {
+                <p><span><img src="~/Images/heating-icon.png" alt="Heating icon" />   Heating</span></p>
+            }
+            @if (@Model.AirConditioning) {
+                <p><span><img src="~/Images/air-conditioning-icon.png" alt="Air-conditioning icon" />   Air-conditioning</span></p>
+            }
+            @if (@Model.WashingMachine) {
+                <p><span><img src="~/Images/washing-machine-icon.png" alt="Washing machine icon" />   Washing machine</span></p>
+            }
+            @if (@Model.DryingMachine) {
+                <p><span><img src="~/Images/drying-machine-icon.png" alt="Drying machine icon" />   Drying machine</span></p>
+            }
+            @if (@Model.Pool) {
+                <p><span><img src="~/Images/pool-icon.png" alt="Pool icon" />   Pool</span></p>
+            }
+            @if (@Model.Gym) {
+                <p><span><img src="~/Images/gym-icon.png" alt="Gym icon" />   Gym</span></p>
+            }
+        </section>
+        
     </div>
 </body>
 </html>
