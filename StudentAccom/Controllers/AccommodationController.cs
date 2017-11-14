@@ -6,11 +6,12 @@ using System.Web.Mvc;
 using StudentAccom.Models;
 using StudentAccom.DAL;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 using System.Net;
 
 namespace StudentAccom.Controllers {
 
-    [Authorize(Roles = "Admin, AccommodationOfficer")]
+    //[Authorize(Roles = "Admin")]
     public class AccommodationController : Controller {
         private StudentAccomContext Context;
         private DbSet<Accommodation> AccommodationsDB;
@@ -18,20 +19,24 @@ namespace StudentAccom.Controllers {
         //private Accommodation[] Accommodations;
         //private Image[] Images;
 
+        [Authorize(Roles = "Admin, Landlord")]
         [HttpGet]
         //This method load the view with the form to create a new Accommodation advertisement
         public ViewResult Create() {
             return View();
         }
 
+        [Authorize(Roles = "Admin, Landlord")]
         [Route("Accommodation/Create")]
         [HttpPost]
         //This method does the validation checks and post the values from and, when there's no erros, persist the data into the database
         public ActionResult Create(Accommodation a, HttpPostedFileBase[] SelectedImages) {
-            if (ModelState.IsValid) {
+            if (ModelState.IsValid) {                
                 Context = new StudentAccomContext();
                 AccommodationsDB = Context.AccommodationsDB;
                 ImagesDB = Context.ImagesDB;
+                var userId = User.Identity.GetUserId();
+                a.LandlordID = userId;
                 AccommodationsDB.Add(a);
 
                 //Persistence of images into the database
@@ -59,12 +64,14 @@ namespace StudentAccom.Controllers {
         }
 
         //This method loads the view with a successful message 
+        [Authorize(Roles = "Admin, Landlord")]
         [Route("Accommodation/Success")]
         public ViewResult CreateSuccess(Accommodation a) {
             return View(a);
         }
 
         //This method loads the Details page of a Accommodation related to a given ID
+        [AllowAnonymous]
         [Route("Accommodation/Details/{id:int}")]
         public ActionResult Details(int? id) {
 
@@ -83,7 +90,7 @@ namespace StudentAccom.Controllers {
             return View(accom);
         }
 
-
+        [Authorize(Roles = "Admin, Landlord")]
         [Route("Accommodation/Edit/{id:int}")]
         [HttpGet]
         //This method load the view with the form to create a new Accommodation advertisement

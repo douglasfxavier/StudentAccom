@@ -202,13 +202,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711141232392_twocontextreset.cs" />
-    <Compile Include="Migrations\201711141232392_twocontextreset.Designer.cs">
-      <DependentUpon>201711141232392_twocontextreset.cs</DependentUpon>
+    <Compile Include="Migrations\201711141816202_twocontextreset.cs" />
+    <Compile Include="Migrations\201711141816202_twocontextreset.Designer.cs">
+      <DependentUpon>201711141816202_twocontextreset.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711141233312_update_user_fields.cs" />
-    <Compile Include="Migrations\201711141233312_update_user_fields.Designer.cs">
-      <DependentUpon>201711141233312_update_user_fields.cs</DependentUpon>
+    <Compile Include="Migrations\201711141817403_update_user_fields.cs" />
+    <Compile Include="Migrations\201711141817403_update_user_fields.Designer.cs">
+      <DependentUpon>201711141817403_update_user_fields.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\StudentAccomConfiguration.cs" />
@@ -333,11 +333,11 @@
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711141232392_twocontextreset.resx">
-      <DependentUpon>201711141232392_twocontextreset.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711141816202_twocontextreset.resx">
+      <DependentUpon>201711141816202_twocontextreset.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711141233312_update_user_fields.resx">
-      <DependentUpon>201711141233312_update_user_fields.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711141817403_update_user_fields.resx">
+      <DependentUpon>201711141817403_update_user_fields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

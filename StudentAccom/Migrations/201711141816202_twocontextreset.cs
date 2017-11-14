@@ -21,7 +21,7 @@ namespace StudentAccom.Migrations.StudentAccomConfiguration
                         TypeRent = c.Int(nullable: false),
                         CleaningFee = c.Single(nullable: false),
                         SecurityDeposit = c.Single(nullable: false),
-                        LandlordID = c.Int(nullable: false),
+                        LandlordID = c.String(),
                         Internet = c.Boolean(nullable: false),
                         Wifi = c.Boolean(nullable: false),
                         CableTV = c.Boolean(nullable: false),

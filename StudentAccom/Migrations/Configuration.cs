@@ -1,5 +1,4 @@
-namespace StudentAccom.Migrations
-{
+namespace StudentAccom.Migrations {
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using StudentAccom.Models;
@@ -8,15 +7,12 @@ namespace StudentAccom.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<StudentAccom.Models.ApplicationDbContext>
-    {
-        public Configuration()
-        {
+    internal sealed class Configuration : DbMigrationsConfiguration<StudentAccom.Models.ApplicationDbContext> {
+        public Configuration() {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(StudentAccom.Models.ApplicationDbContext context)
-        {
+        protected override void Seed(StudentAccom.Models.ApplicationDbContext context) {
             var userStore = new UserStore<ApplicationUser>(context);
             var userManager = new UserManager<ApplicationUser>(userStore);
             var roleStore = new RoleStore<IdentityRole>(context);
