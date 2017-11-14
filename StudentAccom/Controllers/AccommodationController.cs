@@ -8,17 +8,16 @@ using StudentAccom.DAL;
 using System.Data.Entity;
 using System.Net;
 
-namespace StudentAccom.Controllers
-{
-    public class AccommodationController : Controller
-    {
+namespace StudentAccom.Controllers {
+
+    [Authorize(Roles = "Admin, AccommodationOfficer")]
+    public class AccommodationController : Controller {
         private StudentAccomContext Context;
         private DbSet<Accommodation> AccommodationsDB;
         private DbSet<Image> ImagesDB;
         //private Accommodation[] Accommodations;
         //private Image[] Images;
 
-        [Route("Accommodation/Create")]
         [HttpGet]
         //This method load the view with the form to create a new Accommodation advertisement
         public ViewResult Create() {
@@ -36,7 +35,7 @@ namespace StudentAccom.Controllers
                 AccommodationsDB.Add(a);
 
                 //Persistence of images into the database
-                if (SelectedImages != null) { 
+                if (SelectedImages != null) {
                     foreach (var file in SelectedImages) {
                         Image img = new Image {
                             Accommodation = a,
@@ -45,15 +44,15 @@ namespace StudentAccom.Controllers
                         };
                         file.InputStream.Read(img.ImageData, 0, img.ImageData.Length);
                         ImagesDB.Add(img);
-                        
+
                     }
-                    
+
                 }
 
                 Context.SaveChanges();
-                
+
                 //This statement is the redirect action, as part of PRG (Post-Redirect-Get)
-                return RedirectToAction("CreateSuccess",a);
+                return RedirectToAction("CreateSuccess", a);
             } else {
                 return View();
             }
@@ -61,7 +60,7 @@ namespace StudentAccom.Controllers
 
         //This method loads the view with a successful message 
         [Route("Accommodation/Success")]
-        public ViewResult CreateSuccess(Accommodation a){
+        public ViewResult CreateSuccess(Accommodation a) {
             return View(a);
         }
 

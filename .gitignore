@@ -1,4 +1,4 @@
-# Version files from Virtual Studio
+﻿# Version files from Virtual Studio
 .vs/*
 /packages/*
 /StudentAccom/bin/*

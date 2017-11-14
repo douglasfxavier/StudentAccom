@@ -5,8 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace StudentAccom.Models
-{
+namespace StudentAccom.Models {
     public class AccomReview {
         [HiddenInput(DisplayValue = false)]
         [Key]

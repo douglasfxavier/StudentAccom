@@ -6,10 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace StudentAccom.Models
-{
-    public class Accommodation
-    {
+namespace StudentAccom.Models {
+    public class Accommodation {
         [HiddenInput(DisplayValue = false)]
         [Key]
         public int ID { set; get; }
@@ -36,11 +34,11 @@ namespace StudentAccom.Models
         //public Image[] Images{ set; get; }
 
         //Relationship with the class/table User. It record the user Landlord who creates the Accommodation        //Relationship with the class/table User. It record the user Landlord who creates the Accommodation advertisement 
-      
-        //[ForeignKey("User")]     
-        //public int LandlordID { set; get; }
-        public virtual User LandLord { set; get; }
 
+        //[ForeignKey("ApplicationUser")]     
+        public int LandlordID { set; get; }
+        //public ApplicationUser LandLord { set; get; }
+      
         //Sequence of features available OR not (boolean properties)
         public bool Internet { set; get; }
         public bool Wifi { set; get; }
