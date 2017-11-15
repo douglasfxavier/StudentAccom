@@ -3,7 +3,6 @@
 /packages/*
 /StudentAccom/bin/*
 /StudentAccom/obj/*
-/StudentAccom/App_Data/*
 
 # Compiled source #
 *.com
