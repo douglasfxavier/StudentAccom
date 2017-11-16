@@ -5,7 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
+
+
 
 namespace StudentAccom.Models {
     public class Accommodation {
@@ -36,9 +37,9 @@ namespace StudentAccom.Models {
 
         //Relationship with the class/table User. It record the user Landlord who creates the Accommodation        //Relationship with the class/table User. It record the user Landlord who creates the Accommodation advertisement 
 
-        //[ForeignKey("ApplicationUser")]     
+        //[ForeignKey("LandlordID")]     
         public string LandlordID { set; get; }
-        //public User LandLord { set; get; }
+        //public virtual ApplicationUser LandLord { set; get; }
       
         //Sequence of features available OR not (boolean properties)
         public bool Internet { set; get; }
@@ -62,6 +63,9 @@ namespace StudentAccom.Models {
         public bool Parties { set; get; }
         public bool CommercialActivities { set; get; }
 
+        //Fields filed by the AccommodationOfficer
+        public string Comment { set; get; }
+        public Status Status { set; get; }
 
     }
 }

@@ -156,8 +156,10 @@ namespace StudentAccom.Controllers
                     Email = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
-                    Company = model.Company
-
+                    Company = model.Company,
+                    PhoneNumber = model.PhoneNumber
+                    
+                    
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

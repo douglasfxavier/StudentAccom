@@ -40,6 +40,8 @@ namespace StudentAccom.Migrations.StudentAccomConfiguration
                         Pets = c.Boolean(nullable: false),
                         Parties = c.Boolean(nullable: false),
                         CommercialActivities = c.Boolean(nullable: false),
+                        Comment = c.String(),
+                        Status = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
             

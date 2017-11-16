@@ -8,14 +8,19 @@ using StudentAccom.DAL;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity;
 using System.Net;
+using Microsoft.AspNet.Identity.EntityFramework;
+
 
 namespace StudentAccom.Controllers {
 
     //[Authorize(Roles = "Admin")]
     public class AccommodationController : Controller {
-        private StudentAccomContext Context;
+        private StudentAccomContext DBContext;
+        private ApplicationDbContext IdentityContext;
         private DbSet<Accommodation> AccommodationsDB;
         private DbSet<Image> ImagesDB;
+        
+
         //private Accommodation[] Accommodations;
         //private Image[] Images;
 
@@ -32,9 +37,9 @@ namespace StudentAccom.Controllers {
         //This method does the validation checks and post the values from and, when there's no erros, persist the data into the database
         public ActionResult Create(Accommodation a, HttpPostedFileBase[] SelectedImages) {
             if (ModelState.IsValid) {                
-                Context = new StudentAccomContext();
-                AccommodationsDB = Context.AccommodationsDB;
-                ImagesDB = Context.ImagesDB;
+                DBContext = new StudentAccomContext();
+                AccommodationsDB = DBContext.AccommodationsDB;
+                ImagesDB = DBContext.ImagesDB;
                 var userId = User.Identity.GetUserId();
                 a.LandlordID = userId;
                 AccommodationsDB.Add(a);
@@ -54,7 +59,7 @@ namespace StudentAccom.Controllers {
 
                 }
 
-                Context.SaveChanges();
+                DBContext.SaveChanges();
 
                 //This statement is the redirect action, as part of PRG (Post-Redirect-Get)
                 return RedirectToAction("CreateSuccess", a);
@@ -75,19 +80,27 @@ namespace StudentAccom.Controllers {
         [Route("Accommodation/Details/{id:int}")]
         public ActionResult Details(int? id) {
 
+            //Add validation: it can be shown anonymously (seen by students) only if it was approved by the AccommodationOfficer
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Context = new StudentAccomContext();
-            AccommodationsDB = Context.AccommodationsDB;
-            Accommodation accom = AccommodationsDB.Find(id);
-
+            DBContext = new StudentAccomContext();
+            AccommodationsDB = DBContext.AccommodationsDB;
+            Accommodation accom = AccommodationsDB.Find(id);       
+          
             if (accom == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return View(accom);
+            IdentityContext = new ApplicationDbContext();
+
+            ApplicationUser landlord = IdentityContext.Users.Find(accom.LandlordID);
+  
+            ViewData.Add("accom",accom);
+            ViewData.Add("landlord", landlord);
+
+            return View();
         }
 
         [Authorize(Roles = "Admin, Landlord")]
@@ -95,8 +108,8 @@ namespace StudentAccom.Controllers {
         [HttpGet]
         //This method load the view with the form to create a new Accommodation advertisement
         public ActionResult Edit(int ID) {
-            Context = new StudentAccomContext();
-            AccommodationsDB = Context.AccommodationsDB;
+            DBContext = new StudentAccomContext();
+            AccommodationsDB = DBContext.AccommodationsDB;
             Accommodation a = AccommodationsDB.Find(ID);
             return View(a);
         }

@@ -48,10 +48,18 @@ namespace StudentAccom.Migrations {
             }
 
             //Create Role Landlord
-            const string userRoleName = "Landlord";
-            role = roleManager.FindByName(userRoleName);
+            const string userRoleName1 = "Landlord";
+            role = roleManager.FindByName(userRoleName1);
             if (role == null) {
-                role = new IdentityRole(userRoleName);
+                role = new IdentityRole(userRoleName1);
+                var roleresult = roleManager.Create(role);
+            }
+
+            //Create Role AccomodationOfficer
+            const string userRoleName2 = "AccomodationOfficer";
+            role = roleManager.FindByName(userRoleName2);
+            if (role == null) {
+                role = new IdentityRole(userRoleName2);
                 var roleresult = roleManager.Create(role);
             }
         }

@@ -1,4 +1,5 @@
-﻿using StudentAccom.Models;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using StudentAccom.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,5 +12,10 @@ namespace StudentAccom.DAL {
         public StudentAccomContext() : base("StudentAccomDB") { }
         public DbSet<Accommodation> AccommodationsDB { set; get; }
         public DbSet<Image> ImagesDB { set; get; }
+        
+    }
+
+    public class IdentityContext : ApplicationDbContext {
+        public DbSet<ApplicationUser> UsersDB { set; get; }
     }
 }

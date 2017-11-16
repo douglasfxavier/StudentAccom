@@ -93,6 +93,10 @@ namespace StudentAccom.Models
         [Display(Name = "Company")]
         [StringLength(100)]
         public string Company { get; set; }
+
+        [Display(Name = "Phone Number")]
+        [StringLength(14)]
+        public string PhoneNumber { set; get; }
     }
 
     public class ResetPasswordViewModel
