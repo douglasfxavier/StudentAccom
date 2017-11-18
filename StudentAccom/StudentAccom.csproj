@@ -197,18 +197,18 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="DAL\StudentAccomContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711161431457_twocontextreset.cs" />
-    <Compile Include="Migrations\201711161431457_twocontextreset.Designer.cs">
-      <DependentUpon>201711161431457_twocontextreset.cs</DependentUpon>
+    <Compile Include="Migrations\201711181643073_twocontextreset.cs" />
+    <Compile Include="Migrations\201711181643073_twocontextreset.Designer.cs">
+      <DependentUpon>201711181643073_twocontextreset.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711161434085_update_user_fields.cs" />
-    <Compile Include="Migrations\201711161434085_update_user_fields.Designer.cs">
-      <DependentUpon>201711161434085_update_user_fields.cs</DependentUpon>
+    <Compile Include="Migrations\201711181643408_update_user_fields.cs" />
+    <Compile Include="Migrations\201711181643408_update_user_fields.Designer.cs">
+      <DependentUpon>201711181643408_update_user_fields.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\StudentAccomConfiguration.cs" />
@@ -314,14 +314,13 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Accommodation\Create.cshtml" />
-    <Content Include="Views\Accommodation\CreateSuccess.cshtml" />
     <Content Include="Views\Accommodation\Details.cshtml" />
     <Content Include="Views\Accommodation\Edit.cshtml" />
-    <Content Include="Views\Admin\AdminPanel.cshtml" />
-    <Content Include="Views\Admin\Details.cshtml" />
-    <Content Include="Views\Admin\Create.cshtml" />
-    <Content Include="Views\Admin\Delete.cshtml" />
-    <Content Include="Views\Admin\Edit.cshtml" />
+    <Content Include="Views\Role\List.cshtml" />
+    <Content Include="Views\Role\Details.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Delete.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -331,13 +330,15 @@
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Accommodation\Delete.cshtml" />
+    <Content Include="Views\Accommodation\Review.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711161431457_twocontextreset.resx">
-      <DependentUpon>201711161431457_twocontextreset.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711181643073_twocontextreset.resx">
+      <DependentUpon>201711181643073_twocontextreset.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711161434085_update_user_fields.resx">
-      <DependentUpon>201711161434085_update_user_fields.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711181643408_update_user_fields.resx">
+      <DependentUpon>201711181643408_update_user_fields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

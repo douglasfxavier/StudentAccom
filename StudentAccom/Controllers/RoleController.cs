@@ -13,14 +13,14 @@ using Microsoft.AspNet.Identity;
 namespace StudentAccom.Controllers
 {
     [Authorize(Roles ="Admin")]
-    public class AdminController : Controller
+    public class RoleController : Controller
     {
 
-        public AdminController() {
+        public RoleController() {
 
         }
 
-        public AdminController(ApplicationUserManager userManager, ApplicationRoleManager roleManager) {
+        public RoleController(ApplicationUserManager userManager, ApplicationRoleManager roleManager) {
             UserManager = userManager;
             RoleManager = roleManager;
         }
@@ -48,7 +48,7 @@ namespace StudentAccom.Controllers
         }
 
         
-        public ActionResult AdminPanel()
+        public ActionResult List()
         {
             return View(RoleManager.Roles);
         }
@@ -87,7 +87,7 @@ namespace StudentAccom.Controllers
                     ModelState.AddModelError("", roleresult.Errors.First());
                     return View();
                 }
-                return RedirectToAction("AdminPanel");
+                return RedirectToAction("List");
             }
             return View();
         }
@@ -113,7 +113,7 @@ namespace StudentAccom.Controllers
                 var role = await RoleManager.FindByIdAsync(roleModel.Id);
                 role.Name = roleModel.Name;
                 await RoleManager.UpdateAsync(role);
-                return RedirectToAction("AdminPanel");
+                return RedirectToAction("List");
             }
             return View();
         }
@@ -148,7 +148,7 @@ namespace StudentAccom.Controllers
                     ModelState.AddModelError("", result.Errors.First());
                     return View();
                 }
-                return RedirectToAction("AdminPanel");
+                return RedirectToAction("List");
             }
             return View();
         }

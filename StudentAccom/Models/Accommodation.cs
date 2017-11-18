@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -33,13 +34,11 @@ namespace StudentAccom.Models {
         //Not required fields
         public float CleaningFee { set; get; }
         public float SecurityDeposit { set; get; }
-        //public Image[] Images{ set; get; }
+        
 
         //Relationship with the class/table User. It record the user Landlord who creates the Accommodation        //Relationship with the class/table User. It record the user Landlord who creates the Accommodation advertisement 
-
-        //[ForeignKey("LandlordID")]     
+        [HiddenInput(DisplayValue = false)]
         public string LandlordID { set; get; }
-        //public virtual ApplicationUser LandLord { set; get; }
       
         //Sequence of features available OR not (boolean properties)
         public bool Internet { set; get; }
@@ -67,5 +66,8 @@ namespace StudentAccom.Models {
         public string Comment { set; get; }
         public Status Status { set; get; }
 
+        //Collection of Images    
+        public virtual ICollection<Image> Images { set; get; }
+       
     }
 }

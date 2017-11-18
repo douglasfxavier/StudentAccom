@@ -18,49 +18,75 @@ namespace StudentAccom.Migrations {
             var roleStore = new RoleStore<IdentityRole>(context);
             var roleManager = new RoleManager<IdentityRole>(roleStore);
 
-            const string name = "admin@studentaccom.com";
-            const string password = "Admin1@studentaccom.com";
-            const string roleName = "Admin";
+            const string adminName = "admin@studentaccom.com";
+            const string adminPassword = "Admin1@studentaccom.com";
+            const string adminRoleName = "Admin";
 
             //Create Role Admin if it does not exist
-            var role = roleManager.FindByName(roleName);
-            if (role == null) {
-                role = new IdentityRole(roleName);
-                var roleresult = roleManager.Create(role);
+            var adminRole = roleManager.FindByName(adminRoleName);
+            if (adminRole == null) {
+                adminRole = new IdentityRole(adminRoleName);
+                var roleresult = roleManager.Create(adminRole);
             }
 
-            var user = userManager.FindByName(name);
-            if (user == null) {
-                user = new ApplicationUser {
-                    UserName = name,
-                    Email = name,
+            var adminUser = userManager.FindByName(adminName);
+            if (adminUser == null) {
+                adminUser = new ApplicationUser {
+                    UserName = adminName,
+                    Email = adminName,
                     FirstName = "Admin",
                     LastName = "Admin"
                 };
-                var result = userManager.Create(user, password);
-                result = userManager.SetLockoutEnabled(user.Id, false);
+                var result = userManager.Create(adminUser, adminPassword);
+                result = userManager.SetLockoutEnabled(adminUser.Id, false);
             }
 
             //Add user admin to Role Admin if not already added
-            var rolesForUser = userManager.GetRoles(user.Id);
-            if (!rolesForUser.Contains(role.Name)) {
-                var result = userManager.AddToRole(user.Id, role.Name);
+            var rolesForUser = userManager.GetRoles(adminUser.Id);
+            if (!rolesForUser.Contains(adminRole.Name)) {
+                var result = userManager.AddToRole(adminUser.Id, adminRole.Name);
             }
+
 
             //Create Role Landlord
-            const string userRoleName1 = "Landlord";
-            role = roleManager.FindByName(userRoleName1);
-            if (role == null) {
-                role = new IdentityRole(userRoleName1);
-                var roleresult = roleManager.Create(role);
+            const string landlordUserRoleName = "Landlord";
+            var landlordRole = roleManager.FindByName(landlordUserRoleName);
+            if (landlordRole == null) {
+                landlordRole = new IdentityRole(landlordUserRoleName);
+                var roleresult = roleManager.Create(landlordRole);
             }
 
-            //Create Role AccomodationOfficer
-            const string userRoleName2 = "AccomodationOfficer";
-            role = roleManager.FindByName(userRoleName2);
-            if (role == null) {
-                role = new IdentityRole(userRoleName2);
-                var roleresult = roleManager.Create(role);
+
+            //Create Role AccomodationOfficer if it does not exist
+            const string officerUserRoleName = "AccommodationOfficer";
+            var officerRole = roleManager.FindByName(officerUserRoleName);
+            if (officerRole == null) {
+                officerRole = new IdentityRole(officerUserRoleName);
+                var roleresult = roleManager.Create(officerRole);
+            }
+
+            //Create user AccommodationOfficer
+
+            const string officerName = "officer@studentaccom.com";
+            const string officerPassword = "Accom@1";
+            var officerUser = userManager.FindByName(officerName);
+
+            if (officerUser == null) {
+                officerUser = new ApplicationUser {
+                    UserName = officerName,
+                    Email = officerName,
+                    FirstName = "Accommodation",
+                    LastName = "Officer"
+                };
+
+                var result = userManager.Create(officerUser, officerPassword);
+                result = userManager.SetLockoutEnabled(officerUser.Id, false);
+            }
+
+            //Add user Officer to Role AccommodationOfficer if not already added
+            var rolesForOfficerUser = userManager.GetRoles(officerUser.Id);
+            if (!rolesForUser.Contains(officerRole.Name)) {
+                var result = userManager.AddToRole(officerUser.Id, officerRole.Name);
             }
         }
     }

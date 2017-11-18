@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace StudentAccom.Models
 {
@@ -23,7 +24,7 @@ namespace StudentAccom.Models
         [StringLength(100)]
         public string Company { set; get; }
 
-        public Accommodation[] Accommodations { set; get; }
+        public virtual ICollection<Accommodation> Accommodations { set; get; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
