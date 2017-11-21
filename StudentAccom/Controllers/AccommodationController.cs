@@ -15,14 +15,13 @@ namespace StudentAccom.Controllers {
 
     //[Authorize(Roles = "Admin")]
     public class AccommodationController : Controller {
+
         private StudentAccomContext DBContext;
         private ApplicationDbContext IdentityContext;
-        private DbSet<Accommodation> AccommodationsDB;
-        private DbSet<Image> ImagesDB;
+       
         
-
-
         [Authorize(Roles = "Admin, Landlord")]
+        [Route("Accommodation/Create")]
         [HttpGet]
         //This method load the view with the form to create a new Accommodation advertisement
         public ViewResult Create() {
@@ -37,13 +36,11 @@ namespace StudentAccom.Controllers {
         //This method does the validation checks and post the values from and, when there's no erros, persist the data into the database
         public ActionResult Create(Accommodation a, HttpPostedFileBase[] SelectedImages) {
             if (ModelState.IsValid) {                
-                DBContext = new StudentAccomContext();
-                AccommodationsDB = DBContext.AccommodationsDB;
-                ImagesDB = DBContext.ImagesDB;
+                DBContext = new StudentAccomContext();            
                 var userId = User.Identity.GetUserId();
                 a.LandlordID = userId;
                 a.Status = Status.UnderReview;
-                AccommodationsDB.Add(a);
+                DBContext.AccommodationsDB.Add(a);
 
                 //Persistence of images into the database
                 if (SelectedImages != null) {
@@ -54,7 +51,7 @@ namespace StudentAccom.Controllers {
                             MimeType = file.ContentType
                         };
                         file.InputStream.Read(img.ImageData, 0, img.ImageData.Length);
-                        ImagesDB.Add(img);
+                        DBContext.ImagesDB.Add(img);
                     }
                 }
 
@@ -80,20 +77,33 @@ namespace StudentAccom.Controllers {
             }
 
             DBContext = new StudentAccomContext();
-            AccommodationsDB = DBContext.AccommodationsDB;
-            Accommodation accom = AccommodationsDB.Find(id);       
+            Accommodation accom = DBContext.AccommodationsDB.Find(id);       
           
+            //In case the accommodation record does not exist, so the system cannot find it by the ID
             if (accom == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            //In case the accommodation exists, but the user is not logged in (possible customer/student)
+            //The business rule says that students can see only the advertisments once approved
+            if (!Request.IsAuthenticated && !accom.Status.Equals(Status.Approved)) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            //In case the accommodation requested does not belong to the user logged in
+            if (!User.Identity.GetUserId().Equals(accom.LandlordID)) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+                
             IdentityContext = new ApplicationDbContext();
             ApplicationUser landlord = IdentityContext.Users.Find(accom.LandlordID);
 
-            ImagesDB = DBContext.ImagesDB;
-
             ViewData.Add("accom", accom);
-            ViewData.Add("landlord", landlord);
+            var landlordFullName = string.Format("{0} {1}", landlord.FirstName, landlord.LastName);
+            ViewData.Add("landlordFullName", landlordFullName);
+            ViewData.Add("landlordCompany", landlord.Company);
+            ViewData.Add("landlordEmail", landlord.Email);
+            ViewData.Add("landolordPhoneNumber", landlord.PhoneNumber);
 
             return View();
         }
@@ -106,8 +116,7 @@ namespace StudentAccom.Controllers {
         //This method load the view with the form to create a new Accommodation advertisement
         public ActionResult Edit(int id) {
             DBContext = new StudentAccomContext();
-            AccommodationsDB = DBContext.AccommodationsDB;
-            Accommodation a = AccommodationsDB.Find(id);
+            Accommodation a = DBContext.AccommodationsDB.Find(id);
             return View(a);
         }
 
@@ -140,8 +149,7 @@ namespace StudentAccom.Controllers {
             }
 
             DBContext = new StudentAccomContext();
-            AccommodationsDB = DBContext.AccommodationsDB;
-            Accommodation a = AccommodationsDB.Find(id);
+            Accommodation a = DBContext.AccommodationsDB.Find(id);
 
             return View(a);
         }
@@ -152,12 +160,10 @@ namespace StudentAccom.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int? id) {
             DBContext = new StudentAccomContext();
-            AccommodationsDB = DBContext.AccommodationsDB;
-            ImagesDB = DBContext.ImagesDB;
-            Accommodation a = AccommodationsDB.Find(id);
+            Accommodation a = DBContext.AccommodationsDB.Find(id);
 
-            ImagesDB.RemoveRange(a.Images);
-            var result = AccommodationsDB.Remove(a);
+            DBContext.ImagesDB.RemoveRange(a.Images);
+            var result = DBContext.AccommodationsDB.Remove(a);
             DBContext.SaveChanges();
 
             if (result != null) {
@@ -170,8 +176,8 @@ namespace StudentAccom.Controllers {
 
 
         //Method which execute approval or recjection of one accommodation by the officer
-        [Route("Accommodation/Review")]
         [Authorize(Roles = "Admin, AccommodationOfficer")]
+        [Route("Accommodation/Review")]
         [HttpPost]
         public ActionResult Review(String textAreaComment, String btnReview, String Accommodation_ID) {
             int id = int.Parse(Accommodation_ID);
@@ -190,6 +196,25 @@ namespace StudentAccom.Controllers {
            
             return View(a);
         }
+
+        [Authorize(Roles = "Admin, AccommodationOfficer, Landlord")]
+        [Route("Accommodation/List")]
+        [HttpGet]
+        public ActionResult List() {
+            DBContext = new StudentAccomContext();
+            IEnumerable<Accommodation> accommodations;
+            if (User.IsInRole("Landlord")) { 
+                var userId = User.Identity.GetUserId();
+                //Filter by Landlord User based on its ID
+                var accomFilter = DBContext.AccommodationsDB.Where(a => a.LandlordID.Equals(userId));
+                accommodations = accomFilter.ToArray();
+            } else {
+                //All accommodation records
+                accommodations = DBContext.AccommodationsDB.ToArray();
+            }
+            return View(accommodations);
+        }
+
     }
 
 }

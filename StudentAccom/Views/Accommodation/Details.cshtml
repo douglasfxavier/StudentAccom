@@ -1,7 +1,10 @@
 ﻿@{
-    Layout = null;
     StudentAccom.Models.Accommodation accom = (StudentAccom.Models.Accommodation) ViewData["accom"];
-    StudentAccom.Models.ApplicationUser landlord= (StudentAccom.Models.ApplicationUser) ViewData["landlord"];
+    string landlordFullName = (string) ViewData["landlordFullName"];
+    string landlordCompany = (string)ViewData["landlordCompany"];
+    string landlordEmail = (string)ViewData["landlordEmail"];
+    string landlordPhoneNumber = (string)ViewData["landlordPhoneNumber"];
+    ViewBag.Title = "Details of Accommodation Advertisement";
 }
 
 <!DOCTYPE html>
@@ -18,17 +21,17 @@
             <div title="Basic information about the accommodation">
                 <h1>Basic information</h1>
                 <h2><strong>@accom.Title</strong></h2>
-                <p>Landlord: @landlord.FirstName @landlord.LastName</p>
-                <p>Company: @landlord.Company</p>
-                <p>Email: @landlord.Email</p>
-                <p>Phone Number: @landlord.PhoneNumber</p>
+                <p>Landlord: @landlordFullName</p>
+                <p>Company: @landlordCompany</p>
+                <p>Email: @landlordEmail</p>
+                <p>Phone Number: @landlordPhoneNumber</p>
                 <p>Type of accommodation: @accom.TypeAccom</p>
                 <p>Description: @accom.Description</p>
                 <p>Location: @accom.Location</p>
                 <p>Price: @accom.Price</p>
                 <p>Type of rent: @accom.TypeRent</p>
                 <p>Cleaning fee: @accom.CleaningFee</p>
-                <p>Security deposit: @accom.SecurityDeposit</p>
+                <p>Security deposit: @accom.SecurityDeposit</p>                
             </div>
 
             <div title="Additional features in the accommodation">
@@ -78,6 +81,7 @@
             @if (Request.IsAuthenticated && User.IsInRole("Landlord")) {
                 <div>
                     @Html.ActionLink("Edit", "Edit", new { id = accom.ID })
+                    <span> | </span>
                     @Html.ActionLink("Delete", "Delete", new { id = accom.ID })
                 </div>
             }

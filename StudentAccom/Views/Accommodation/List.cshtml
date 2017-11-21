@@ -1,0 +1,61 @@
+﻿@model IEnumerable<StudentAccom.Models.Accommodation>
+
+@{
+    ViewBag.Title = "My Advertisements";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.ID })
+            @if (Request.IsAuthenticated && User.IsInRole("Landlord")) {
+                <span> | </span>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) 
+                <span> | </span>
+                @Html.ActionLink("Delete", "Delete", new { id=item.ID })                
+            }
+            
+        </td>
+    </tr>
+}
+
+</table>
