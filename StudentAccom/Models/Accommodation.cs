@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
@@ -29,12 +31,13 @@ namespace StudentAccom.Models {
         //Not required fields
         public decimal CleaningFee { set; get; }
         public decimal SecurityDeposit { set; get; }
-        
+
 
         //Relationship with the class/table User. It record the user Landlord who creates the Accommodation        //Relationship with the class/table User. It record the user Landlord who creates the Accommodation advertisement 
         [HiddenInput(DisplayValue = false)]
         public string LandlordID { set; get; }
-      
+
+
         //Sequence of features available OR not (boolean properties)
         public bool Internet { set; get; }
         public bool Wifi { set; get; }

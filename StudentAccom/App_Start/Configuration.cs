@@ -9,7 +9,7 @@ namespace StudentAccom.Migrations {
 
     internal sealed class Configuration : DbMigrationsConfiguration<StudentAccom.Models.ApplicationDbContext> {
         public Configuration() {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(StudentAccom.Models.ApplicationDbContext context) {

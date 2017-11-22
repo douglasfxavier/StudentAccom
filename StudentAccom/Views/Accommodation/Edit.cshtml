@@ -16,7 +16,8 @@
     <section title="Form to create a accommodation record" class="form-group-lg col-lg-12">
         <h1>Editing Accommodation Advertisement</h1>
         <br />
-        @using (Html.BeginForm("Create", "Accommodation", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+        @using (Html.BeginForm("Edit", "Accommodation", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+            @Html.HiddenFor(model => model.LandlordID)
             <div class="form-group-lg col-lg-8">
                 <fieldset class="form-group-lg col-lg-12">
                     <legend>Basic information</legend>
@@ -170,7 +171,6 @@
 
                     <div class="form-row">
                         <div class="form-group-lg col-lg-12">
-
                             <input class="btn btn-default" type="reset" value="Clear" />
                             <input class="btn btn-primary" type="submit" value="Submit" />
                             <hr />

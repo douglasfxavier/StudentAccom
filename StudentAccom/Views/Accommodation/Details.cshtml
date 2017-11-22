@@ -1,9 +1,10 @@
 ﻿@{
     StudentAccom.Models.Accommodation accom = (StudentAccom.Models.Accommodation)ViewData["accom"];
-    string landlordFullName = (string)ViewData["landlordFullName"];
-    string landlordCompany = (string)ViewData["landlordCompany"];
-    string landlordEmail = (string)ViewData["landlordEmail"];
-    string landlordPhoneNumber = (string)ViewData["landlordPhoneNumber"];
+    string currentUserId = (string)ViewData["currentUserId"];
+    string landlordFullName = (string) ViewData["landlordFullName"];
+    string landlordCompany = (string) ViewData["landlordCompany"];
+    string landlordEmail = (string) ViewData["landlordEmail"];
+    string landlordPhoneNumber = (string) ViewData["landlordPhoneNumber"];
     ViewBag.Title = "Details of Accommodation Advertisement";
 }
 
@@ -18,7 +19,7 @@
     <section title="Accommodation details" class="col-md-12">
         <div class="col-md-7">
             <h1><strong>@accom.Title</strong></h1>
-            @if (Request.IsAuthenticated && User.IsInRole("Landlord")) {
+            @if (Request.IsAuthenticated && User.IsInRole("Landlord") && currentUserId.Equals(accom.LandlordID)) {
                 <div>
                     <span>@Html.ActionLink("Edit", "Edit", new { id = accom.ID })</span>
                     <span> | </span>
@@ -102,7 +103,7 @@
             }else if (Request.IsAuthenticated && User.IsInRole("AccommodationOfficer") && accom.Status != StudentAccom.Models.Status.UnderReview){
                 <h1>Accommodation Office Review</h1>
                 <p><b>Status: </b>@accom.Status</p>
-                <b>Comentário</b>
+                <b>Comment</b>
                 <p>@accom.Comment</p>
             }
 

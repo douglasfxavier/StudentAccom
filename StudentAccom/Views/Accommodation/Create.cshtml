@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "New Accommodation Advertisement";
+    string LandlordID = (string) ViewData["LandlordID"];
 }
 
 <!DOCTYPE html>
@@ -16,6 +17,7 @@
         <h1>New Accommodation Advertisement</h1>
         <br />
         @using (Html.BeginForm("Create", "Accommodation", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+            
             <div class="form-group-lg col-lg-8">
                 <fieldset class="form-group-lg col-lg-12">
                     <legend>Basic information</legend>

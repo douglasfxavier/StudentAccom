@@ -202,16 +202,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711221122467_twocontextreset.cs" />
-    <Compile Include="Migrations\201711221122467_twocontextreset.Designer.cs">
-      <DependentUpon>201711221122467_twocontextreset.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711221123214_update_user_fields.cs" />
-    <Compile Include="Migrations\201711221123214_update_user_fields.Designer.cs">
-      <DependentUpon>201711221123214_update_user_fields.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Migrations\StudentAccomConfiguration.cs" />
+    <Compile Include="App_Start\Configuration.cs" />
+    <Compile Include="App_Start\StudentAccomConfiguration.cs" />
     <Compile Include="Models\Accommodation.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -331,14 +323,6 @@
     <Content Include="Views\Accommodation\Review.cshtml" />
     <Content Include="Views\Advertisements\List.cshtml" />
     <Content Include="Views\Advertisements\Show.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711221122467_twocontextreset.resx">
-      <DependentUpon>201711221122467_twocontextreset.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711221123214_update_user_fields.resx">
-      <DependentUpon>201711221123214_update_user_fields.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

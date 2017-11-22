@@ -22,6 +22,7 @@ namespace StudentAccom.Controllers {
         [HttpGet]
         //This method load the view with the form to create a new Accommodation advertisement
         public ViewResult Create() {
+           
             return View();
         }
 
@@ -74,8 +75,8 @@ namespace StudentAccom.Controllers {
             }
 
             DBContext = new StudentAccomContext();
-            Accommodation accom = DBContext.AccommodationsDB.Find(id);       
-          
+            Accommodation accom = DBContext.AccommodationsDB.Find(id);
+
             //In case the accommodation record does not exist, so the system cannot find it by the ID
             if (accom == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -86,14 +87,12 @@ namespace StudentAccom.Controllers {
             if (!Request.IsAuthenticated && !accom.Status.Equals(Status.Approved)) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
-            if (Request.IsAuthenticated && User.IsInRole("Landlord") && !accom.LandlordID.Equals(User.Identity.GetUserId())){
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+
 
             IdentityContext = new ApplicationDbContext();
             ApplicationUser landlord = IdentityContext.Users.Find(accom.LandlordID);
 
+            ViewData.Add("currentUserId", User.Identity.GetUserId());
             ViewData.Add("accom", accom);
             var landlordFullName = string.Format("{0} {1}", landlord.FirstName, landlord.LastName);
             ViewData.Add("landlordFullName", landlordFullName);
@@ -123,12 +122,12 @@ namespace StudentAccom.Controllers {
 
 
         //This method sends the POST message with the changes in the given accommodation
-        [Route("Home/Edit/{pid:int}")]
         [HttpPost, ActionName("Edit")]
         public ActionResult Edit(int id, Accommodation a) {
             if (ModelState.IsValid) {
 
                 DBContext = new StudentAccomContext();
+                a.Status = Status.UnderReview;
                 DBContext.Entry(a).State = EntityState.Modified;
                 DBContext.SaveChanges();
 

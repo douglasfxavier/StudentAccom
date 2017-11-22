@@ -9,8 +9,9 @@
     </head>
     <body>
         <section class="col-md-12 ads-container" id="MainSection" title="Accommodation advertisements">
-            @if (Model == null) {
-                <p>There's no advertisements to show right now. If you are a Landord register now and create your own ads.</p>
+            @if (Model == null || Model.ToArray().Length == 0) {
+                <h1>There's no advertisement to show right now. If you are a Landord register yourself and create your own ads.</h1>
+
             }
             @foreach (var accom in Model) {
                 <div class="ad col-md-4 text-center">
