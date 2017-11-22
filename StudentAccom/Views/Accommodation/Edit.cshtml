@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Edit Accommodation Advertisement";
 }
-
 <!DOCTYPE html>
 
 <html>
@@ -14,11 +13,12 @@
 </head>
 <body>
     @Html.ValidationSummary()
-    <section title="Form to create a accommodation record" class="form-group-lg col-md-12">
-        @using (Html.BeginForm("Edit", "Accommodation", FormMethod.Post, new { enctype = "multipart/form-data-" })) {
-            @Html.HiddenFor(model => model.LandlordID)
-            <div class="form-group-lg col-md-6">
-                <fieldset class="form-group-lg col-md-12">
+    <section title="Form to create a accommodation record" class="form-group-lg col-lg-12">
+        <h1>Editing Accommodation Advertisement</h1>
+        <br />
+        @using (Html.BeginForm("Create", "Accommodation", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+            <div class="form-group-lg col-lg-8">
+                <fieldset class="form-group-lg col-lg-12">
                     <legend>Basic information</legend>
                     <div class="form-row">
                         <div class="form-group-lg col-md-12">
@@ -27,27 +27,27 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group-lg col-md-6">
+                        <div class="form-group-lg col-lg-6">
                             <label for="inputTypeAccom">Type of accommmodation</label>
                             @Html.EnumDropDownListFor(model => model.TypeAccom, new { @class = "form-control", id = "inputTypeAccom", placeholder = "Type of accomodation" })
                         </div>
-                        <div class="form-group-lg col-md-6">
+                        <div class="form-group-lg col-lg-6">
                             <label for="inputLocation">Location</label>
                             @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control", id = "inputLocation", placeholder = "Location" } })
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group-lg col-md-12">
+                        <div class="form-group-lg col-lg-12">
                             <label for="textAreaDescription">Description</label>
-                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control vresize", id = "textAreaDescription", style = "resize:none;", rows = "10", placeholder = "Advertisement Description" })
+                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", id = "textAreaDescription", rows = "10", placeholder = "Advertisement Description" })
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group-lg col-md-6">
+                        <div class="form-group-lg col-lg-6">
                             <label for="inputNumbersRooms">Number of rooms</label>
                             @Html.EditorFor(model => model.RoomsNumber, new { htmlAttributes = new { @class = "form-control", id = "inputNumbersRooms", value = "0" } })
                         </div>
-                        <div class="form-group-lg col-md-6">
+                        <div class="form-group-lg col-lg-6">
                             <label for="selectTypeRent">Type of rent</label>
                             @Html.EnumDropDownListFor(model => model.TypeRent, new { @class = "form-control", id = "inputNumbersRooms" })
                         </div>
@@ -57,118 +57,123 @@
                             <label for="inputPrice">Price</label>
                             @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", id = "inputPrice", value = "0" } })
                         </div>
-                        <div class="form-group-lg col-md-3">
+                        <div class="form-group-lg col-lg-3">
                             <label for="inputCleaningFee">Cleaning fee</label>
                             @Html.EditorFor(model => model.CleaningFee, new { htmlAttributes = new { @class = "form-control", id = "inputCleaningFee", value = "0" } })
                         </div>
-                        <div class="form-group-lg col-md-3">
+                        <div class="form-group-lg col-lg-3">
                             <label for="inputSecurityDeposit">Security deposit</label>
                             @Html.EditorFor(model => model.SecurityDeposit, new { htmlAttributes = new { @class = "form-control", id = "inputSecurityDeposit", value = "0" } })
                         </div>
                     </div>
                 </fieldset>
 
-                <fieldset title="Additional features in the accommodation" class="form-group-lg col-md-12">
+                <fieldset title="Additional features in the accommodation" class="form-group-lg col-lg-12">
                     <legend>Features</legend>
                     <div class="form-row">
-                        <div class="form-group-lg col-md-4">
+                        <div class="form-group-lg col-lg-4">
                             @Html.EditorFor(model => model.Internet, new { htmlAttributes = new { @class = "custom-control-input", id = "checkboxInternet" } })
                             <label for="checkboxInternet">Internet</label>
                         </div>
-                        <div class="form-group-lg col-md-4">
+                        <div class="form-group-lg col-lg-4">
                             @Html.EditorFor(model => model.Wifi, new { htmlAttributes = new { @class = "custom-control-input", id = "checkboxWifi" } })
                             <label for="checkboxWifi">Wi-fi</label>
                         </div>
-                        <div class="form-group-lg col-md-4">
+                        <div class="form-group-lg col-lg-4">
                             @Html.EditorFor(model => model.CableTV, new { htmlAttributes = new { @class = "custom-control-input", id = "checkboxCableTV" } })
                             <label for="checkboxCableTV">Cable TV</label>
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group-lg col-md-4">
+                        <div class="form-group-lg col-lg-4">
                             @Html.EditorFor(model => model.TV, new { htmlAttributes = new { @class = "custom-control-input", id = "checkboxTV" } })
                             <label for="checkboxTV">TV</label>
                         </div>
-                        <div class="form-group-lg col-md-4">
+                        <div class="form-group-lg col-lg-4">
                             @Html.EditorFor(model => model.Doorman, new { htmlAttributes = new { @class = "custom-control-input", id = "checkboxDoorman" } })
                             <label for="checkboxDoorman">Doorman</label>
                         </div>
-                        <div class="form-group-lg col-md-4">
+                        <div class="form-group-lg col-lg-4">
                             @Html.EditorFor(model => model.Kitchen, new { htmlAttributes = new { @class = "custom-control-input", id = "checkboxKitchen" } })
                             <label for="checkboxKitchen">Kitchen</label>
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group-lg col-md-4">
+                        <div class="form-group-lg col-lg-4">
                             @Html.EditorFor(model => model.IndividualBathroom, new { htmlAttributes = new { @class = "custom-control-input", id = "checkboxIndividualBathroom" } })
                             <label for="checkboxIndividualBathroom">Individual bathroom</label>
                         </div>
-                        <div class="form-group-lg col-md-4">
+                        <div class="form-group-lg col-lg-4">
                             @Html.EditorFor(model => model.SharedBathroom, new { htmlAttributes = new { @class = "custom-control-input", id = "checkboxSharedBathroom" } })
                             <label for="checkboxSharedBathroom">Shared bathroom</label>
                         </div>
-                        <div class="form-group-lg col-md-4">
+                        <div class="form-group-lg col-lg-4">
                             @Html.EditorFor(model => model.Heating, new { htmlAttributes = new { @class = "custom-control-input", id = "checkboxHeating" } })
                             <label for="checkboxHeating">Heating</label>
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group-lg col-md-4">
+                        <div class="form-group-lg col-lg-4">
                             @Html.EditorFor(model => model.AirConditioning, new { htmlAttributes = new { @class = "custom-control-input", id = "checkboxAirConditioning" } })
                             <label for="checkboxAirConditioning">Air-conditioning</label>
                         </div>
-                        <div class="form-group-lg col-md-4">
+                        <div class="form-group-lg col-lg-4">
                             @Html.EditorFor(model => model.WashingMachine, new { htmlAttributes = new { @class = "custom-control-input", id = "checkboxWashingMachine" } })
                             <label for="checkboxWashingMachine">Washing machine</label>
                         </div>
-                        <div class="form-group-lg col-md-4">
+                        <div class="form-group-lg col-lg-4">
                             @Html.EditorFor(model => model.DryingMachine, new { htmlAttributes = new { @class = "custom-control-input" }, id = "checkboxDryingMachine" })
                             <label for="checkboxDryingMachine">Drying machine</label>
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group-lg col-md-4">
+                        <div class="form-group-lg col-lg-4">
                             @Html.EditorFor(model => model.Pool, new { htmlAttributes = new { @class = "custom-control-input", id = "checkboxPool" } })
                             <label for="checkboxPool">Pool</label>
                         </div>
-                        <div class="form-group-lg col-md-4">
+                        <div class="form-group-lg col-lg-4">
                             @Html.EditorFor(model => model.Gym, new { htmlAttributes = new { @class = "custom-control-input", id = "checkboxGym" } })
                             <label for="checkboxGym">Gym</label>
                         </div>
                     </div>
                 </fieldset>
-
-                <fieldset title="Permitted items" class="form-group-lg col-md-12">
+                <br />
+                <fieldset title="Permitted items" class="form-group-lg col-lg-12">
                     <legend>Permitted items and activities</legend>
                     <div class="form-row">
-                        <div class="form-group-lg col-md-6">
+                        <div class="form-group-lg col-lg-6">
                             @Html.EditorFor(model => model.Smoking, new { htmlAttributes = new { @class = "custom-control-input", id = "checkboxSmoking" } })
                             <label for="checkboxSmoking">Smoking</label>
                         </div>
-                        <div class="form-group-lg col-md-6">
+                        <div class="form-group-lg col-lg-6">
                             @Html.EditorFor(model => model.Pets, new { htmlAttributes = new { @class = "custom-control-input", id = "checkboxPets" } })
                             <label for="checkboxPets">Pets</label>
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group-lg col-md-6">
+                        <div class="form-group-lg col-lg-6">
                             @Html.EditorFor(model => model.Parties, new { htmlAttributes = new { @class = "custom-control-input", id = "checkboxParties" } })
                             <label for="checkboxParties">Parties</label>
                         </div>
-                        <div class="form-group-lg col-md-6">
+                        <div class="form-group-lg col-lg-6">
                             @Html.EditorFor(model => model.CommercialActivities, new { htmlAttributes = new { @class = "custom-control-input", id = "checkboxCommercialActivities" } })
                             <label for="checkboxCommercialActivities">Commercial activities</label>
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group-lg col-md-12">
+                        <div class="form-group-lg col-lg-12">
+                            <br />
                             <input class="form-control-file" type="file" multiple name="SelectedImages" />
+                            <br />
                         </div>
                     </div>
+
                     <div class="form-row">
-                        <div class="form-group-lg col-md-12">
-                            <input class="btn btn-primary" type="reset" value="Clear" />
+                        <div class="form-group-lg col-lg-12">
+
+                            <input class="btn btn-default" type="reset" value="Clear" />
                             <input class="btn btn-primary" type="submit" value="Submit" />
+                            <hr />
                         </div>
                     </div>
                 </fieldset>

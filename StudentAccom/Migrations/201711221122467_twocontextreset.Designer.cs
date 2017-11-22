@@ -13,7 +13,7 @@ namespace StudentAccom.Migrations.StudentAccomConfiguration
         
         string IMigrationMetadata.Id
         {
-            get { return "201711181643073_twocontextreset"; }
+            get { return "201711221122467_twocontextreset"; }
         }
         
         string IMigrationMetadata.Source

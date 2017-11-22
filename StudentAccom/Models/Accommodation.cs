@@ -1,10 +1,5 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 
@@ -26,14 +21,14 @@ namespace StudentAccom.Models {
         [Required]
         public int RoomsNumber { set; get; }
         [Required]
-        public float Price { set; get; }
+        public decimal Price { set; get; }
         [Required]
         public TypeRent TypeRent { set; get; }
 
 
         //Not required fields
-        public float CleaningFee { set; get; }
-        public float SecurityDeposit { set; get; }
+        public decimal CleaningFee { set; get; }
+        public decimal SecurityDeposit { set; get; }
         
 
         //Relationship with the class/table User. It record the user Landlord who creates the Accommodation        //Relationship with the class/table User. It record the user Landlord who creates the Accommodation advertisement 

@@ -14,8 +14,4 @@ namespace StudentAccom.DAL {
         public DbSet<Image> ImagesDB { set; get; }
         
     }
-
-    public class IdentityContext : ApplicationDbContext {
-        public DbSet<ApplicationUser> UsersDB { set; get; }
-    }
 }

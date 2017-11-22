@@ -13,7 +13,7 @@ namespace StudentAccom.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201711181643408_update_user_fields"; }
+            get { return "201711221123214_update_user_fields"; }
         }
         
         string IMigrationMetadata.Source

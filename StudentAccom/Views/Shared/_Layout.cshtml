@@ -4,11 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - StudentAccom</title>
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/bootstrap.css")   
+    @Styles.Render("~/Content/custom.css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body>
+<body class="page-background">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -24,19 +25,20 @@
                     <li>@Html.ActionLink("Home", "Show", "Advertisements")</li>
                     
                     @if (Request.IsAuthenticated && User.IsInRole("Landlord")) {
-                        <li>@Html.ActionLink("My advertisements", "List", "Accommodation")</li>
+                        <li>@Html.ActionLink("My advertisements", "List", "Advertisements")</li>
+                        <li>@Html.ActionLink("New Advertisement", "Create", "Accommodation")</li>
                     } else if (Request.IsAuthenticated && (User.IsInRole("Admin")) || (User.IsInRole("AccommodationOfficer"))) {
-                        <li>@Html.ActionLink("All advertisements", "List", "Accommodation")</li>
+                        <li>@Html.ActionLink("All advertisements", "List", "Advertisements")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content body-margin" >
         @RenderBody()
         <hr />
-        <footer>
+        <footer class="foot-margin">
             <p>&copy; @DateTime.Now.Year - Douglas & Autumn</p>
         </footer>
     </div>

@@ -6,17 +6,25 @@
 
 <html>
     <head>
-        <link rel="stylesheet" href="~/Content/bootstrap.css" />
-        <link rel="stylesheet" href="~/Content/Site.css" />
     </head>
     <body>
-        <h2>@ViewBag.Title</h2>
-        <section class="col-md-12" id="MainSection" title="Accommodation advertisements">
-            @foreach(var accom in Model) {
-                <div class="ad col-md-6">
-                    <img class="img-thumbnail" width="304" height="236" src="data:accom.Images.ElementAt(0).MimeType;base64, @Convert.ToBase64String(accom.Images.ElementAt(0).ImageData)" />
-                    <p><strong>@accom.Title</strong></p>
-                    <p>@accom.Description</p>                    
+        <section class="col-md-12 ads-container" id="MainSection" title="Accommodation advertisements">
+            @if (Model == null) {
+                <p>There's no advertisements to show right now. If you are a Landord register now and create your own ads.</p>
+            }
+            @foreach (var accom in Model) {
+                <div class="ad col-md-4 text-center">
+                    <a href="../Accommodation/Details/@accom.ID">
+                        <img class="img-thumbnail" alt="@accom.Title" src="data:accom.Images.ElementAt(0).MimeType;base64, @Convert.ToBase64String(accom.Images.ElementAt(0).ImageData)" />
+                    </a>
+                    <div class="ad-box">
+                        <a href="../Accommodation/Details/@accom.ID">
+                            <p class="ad-box-title"><strong>@accom.Title</strong></p>
+                        </a>
+                        <p>@accom.Location</p>
+                        <p><span class="pound-sign">&pound; </span><span class="ad-box-price">@accom.Price</span><span>/ @accom.TypeRent</span></p>
+                    </div>
+
                 </div>
             }
         </section>

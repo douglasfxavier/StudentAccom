@@ -1,13 +1,19 @@
 ﻿@model IEnumerable<StudentAccom.Models.Accommodation>
 
 @{
-    ViewBag.Title = "My Advertisements";
+    if (User.IsInRole("Landlord")) {
+        ViewBag.Title = "My Advertisements";
+    } else {
+        ViewBag.Title = "All Advertisements";
+    }
 }
 
 <h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
+<p class="link-right">
+    @if (Request.IsAuthenticated && User.IsInRole("Landlord")) {
+        @Html.ActionLink("New Advertisement", "../Accommodation/Create")
+    }
 </p>
 
 <table class="table">
@@ -39,19 +45,19 @@
             @Html.DisplayFor(modelItem => item.Location)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Price)
+            &pound; @Html.DisplayFor(modelItem => item.Price)
         </td>
         
         <td>
             @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            @Html.ActionLink("Details", "Details", new { id = item.ID })
+            @Html.ActionLink("Details", "../Accommodation/Details", new { id = item.ID })
             @if (Request.IsAuthenticated && User.IsInRole("Landlord")) {
                 <span> | </span>
-                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) 
+                @Html.ActionLink("Edit", "../Accommodation/Edit", new { id=item.ID }) 
                 <span> | </span>
-                @Html.ActionLink("Delete", "Delete", new { id=item.ID })                
+                @Html.ActionLink("Delete", "../Accommodation/Delete", new { id=item.ID })                
             }
             
         </td>

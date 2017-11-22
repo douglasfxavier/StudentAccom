@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using StudentAccom.Models;
@@ -8,7 +6,6 @@ using StudentAccom.DAL;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity;
 using System.Net;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 
 namespace StudentAccom.Controllers {
@@ -89,12 +86,11 @@ namespace StudentAccom.Controllers {
             if (!Request.IsAuthenticated && !accom.Status.Equals(Status.Approved)) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            //In case the accommodation requested does not belong to the user logged in
-            if (!User.Identity.GetUserId().Equals(accom.LandlordID)) {
+            
+            if (Request.IsAuthenticated && User.IsInRole("Landlord") && !accom.LandlordID.Equals(User.Identity.GetUserId())){
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-                
+
             IdentityContext = new ApplicationDbContext();
             ApplicationUser landlord = IdentityContext.Users.Find(accom.LandlordID);
 
@@ -113,16 +109,20 @@ namespace StudentAccom.Controllers {
         [Authorize(Roles = "Admin, Landlord")]
         [Route("Accommodation/Edit/{id:int}")]
         [HttpGet]
-        //This method load the view with the form to create a new Accommodation advertisement
+        //This method load the view with the form to edit a giver accommodation advertisement
         public ActionResult Edit(int id) {
             DBContext = new StudentAccomContext();
-            Accommodation a = DBContext.AccommodationsDB.Find(id);
-            return View(a);
+            Accommodation accom = DBContext.AccommodationsDB.Find(id);
+
+            if (Request.IsAuthenticated && !accom.LandlordID.Equals(User.Identity.GetUserId()) && !User.IsInRole("Admin")){
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return View(accom);
         }
 
 
 
-        //This method sends the POST message to the server
+        //This method sends the POST message with the changes in the given accommodation
         [Route("Home/Edit/{pid:int}")]
         [HttpPost, ActionName("Edit")]
         public ActionResult Edit(int id, Accommodation a) {
@@ -195,24 +195,6 @@ namespace StudentAccom.Controllers {
             DBContext.SaveChanges();
            
             return View(a);
-        }
-
-        [Authorize(Roles = "Admin, AccommodationOfficer, Landlord")]
-        [Route("Accommodation/List")]
-        [HttpGet]
-        public ActionResult List() {
-            DBContext = new StudentAccomContext();
-            IEnumerable<Accommodation> accommodations;
-            if (User.IsInRole("Landlord")) { 
-                var userId = User.Identity.GetUserId();
-                //Filter by Landlord User based on its ID
-                var accomFilter = DBContext.AccommodationsDB.Where(a => a.LandlordID.Equals(userId));
-                accommodations = accomFilter.ToArray();
-            } else {
-                //All accommodation records
-                accommodations = DBContext.AccommodationsDB.ToArray();
-            }
-            return View(accommodations);
         }
 
     }
