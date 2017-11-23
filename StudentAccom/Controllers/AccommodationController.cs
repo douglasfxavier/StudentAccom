@@ -165,11 +165,11 @@ namespace StudentAccom.Controllers {
             var result = DBContext.AccommodationsDB.Remove(a);
             DBContext.SaveChanges();
 
-            if (result != null) {
+            if (result == null) {
                 return View();
             }
             //Redirect to the list of accommodations from the Landlord logged in
-            return RedirectToAction("");
+            return RedirectToAction("../Advertisements/List");
         }
 
 
