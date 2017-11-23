@@ -6,6 +6,8 @@
     } else {
         ViewBag.Title = "All Advertisements";
     }
+
+    Dictionary<string, string> Landlords = (Dictionary<string, string>) ViewData["Landlords"];
 }
 
 
@@ -29,7 +31,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Price)
         </th>
-        
+        <th>
+            Landlord/Company
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Status)
         </th>
@@ -49,7 +53,9 @@
         <td>
             &pound; @Html.DisplayFor(modelItem => item.Price)
         </td>
-        
+        <td>
+            @Landlords[item.LandlordID]
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Status)
         </td>
