@@ -29,19 +29,30 @@ namespace StudentAccom.Controllers
         [Authorize(Roles = "Admin, AccommodationOfficer, Landlord")]
         [Route("Advertisements/List")]
         [HttpGet]
-        public ActionResult List(string LandlordID, string search) {
+        public ActionResult List(string search, string status) {
             DBContext = new StudentAccomContext();
             IdentityContext = new ApplicationDbContext();
 
             IEnumerable<Accommodation> accommodations = DBContext.AccommodationsDB;
 
-            if (!String.IsNullOrEmpty(LandlordID)) {
-                accommodations = accommodations.Where(a => a.LandlordID == LandlordID);
-            }
-
             if (!String.IsNullOrEmpty(search)) {
                 accommodations = accommodations.Where(a => a.Title.Contains(search) || a.Description.Contains(search) || a.Location.Contains(search));
+                ViewBag.Search = search;
             }
+
+            var enumStatus = accommodations.OrderBy(a => a.Status).Select(a => a.Status).Distinct();
+
+            if (!String.IsNullOrEmpty(status)) {
+                if (status.Equals("Approved")) {
+                    accommodations = accommodations.Where(a => a.Status.Equals(Status.Approved));
+                }else if (status.Equals("Rejected")){ 
+                    accommodations = accommodations.Where(a => a.Status.Equals(Status.Rejected));
+                }else if ((status.Equals("UnderReview"))) {
+                    accommodations = accommodations.Where(a => a.Status.Equals(Status.UnderReview));
+                }
+            }
+                        
+            ViewBag.Status = new SelectList(enumStatus);
 
             if (User.IsInRole("Landlord")) {
                 var userId = User.Identity.GetUserId();
@@ -62,7 +73,9 @@ namespace StudentAccom.Controllers
                 
             }
             ViewData.Add("Landlords", map);
-            return View(accommodations.ToArray());
+            ViewData.Add("Accommodations", accommodations.ToArray());
+
+            return View();
         }
 
 

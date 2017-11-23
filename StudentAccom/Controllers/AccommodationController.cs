@@ -192,8 +192,8 @@ namespace StudentAccom.Controllers {
 
             DBContext.Entry(a).State = EntityState.Modified;
             DBContext.SaveChanges();
-           
-            return View(a);
+
+            return RedirectToAction("Details/" + id);
         }
 
     }

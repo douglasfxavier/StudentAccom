@@ -1,4 +1,4 @@
-﻿@model IEnumerable<StudentAccom.Models.Accommodation>
+﻿@model StudentAccom.Models.Accommodation
 
 @{
     if (User.IsInRole("Landlord")) {
@@ -8,6 +8,8 @@
     }
 
     Dictionary<string, string> Landlords = (Dictionary<string, string>) ViewData["Landlords"];
+    IEnumerable<StudentAccom.Models.Accommodation> Accommodations = (IEnumerable<StudentAccom.Models.Accommodation>) ViewData["Accommodations"];
+
 }
 
 
@@ -19,6 +21,11 @@
         @Html.ActionLink("New Advertisement", "../Accommodation/Create")
     }
 </p>
+@using (Html.BeginForm("List", "Advertisements", FormMethod.Get)) {
+    <label>Filter by status</label> @Html.DropDownList("Status", "All");
+    <input type="submit" value="Filter" />
+    <input type="hidden" name="Search" id="Search" value="@ViewBag.Search" />
+}
 
 <div class="table-responsive">
     <table class="table">
@@ -46,7 +53,7 @@
             </th>
         </tr>
 
-        @foreach (var accom in Model) {
+        @foreach (var accom in Accommodations) {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => accom.Title)
