@@ -20,56 +20,63 @@
     }
 </p>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            Landlord/Company
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            Actions
-        </th>
-    </tr>
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                Landlord/Company
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location)
-        </td>
-        <td>
-            &pound; @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Landlords[item.LandlordID]
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "../Accommodation/Details", new { id = item.ID })
-            @if (Request.IsAuthenticated && User.IsInRole("Landlord")) {
-                <span> | </span>
-                @Html.ActionLink("Edit", "../Accommodation/Edit", new { id=item.ID }) 
-                <span> | </span>
-                @Html.ActionLink("Delete", "../Accommodation/Delete", new { id=item.ID })                
-            }
-            
-        </td>
-    </tr>
-}
+        @foreach (var accom in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => accom.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => accom.TypeAccom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => accom.Location)
+                </td>
+                <td>
+                    &pound; @Html.DisplayFor(modelItem => accom.Price) / @Html.DisplayFor(modelItem => accom.TypeRent)
+                </td>
+                <td>
+                    @Landlords[accom.LandlordID]
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => accom.Status)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "../Accommodation/Details", new { id = accom.ID })
+                    @if (Request.IsAuthenticated && User.IsInRole("Landlord")) {
+                        <span> | </span>
+                        @Html.ActionLink("Edit", "../Accommodation/Edit", new { id = accom.ID })
+                        <span> | </span>
+                        @Html.ActionLink("Delete", "../Accommodation/Delete", new { id = accom.ID })
+                    }
 
-</table>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

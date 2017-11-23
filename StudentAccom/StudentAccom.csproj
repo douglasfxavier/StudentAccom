@@ -196,6 +196,7 @@
     <Compile Include="Controllers\AccommodationController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdvertisementsController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="DAL\StudentAccomContext.cs" />
@@ -323,6 +324,10 @@
     <Content Include="Views\Accommodation\Review.cshtml" />
     <Content Include="Views\Advertisements\List.cshtml" />
     <Content Include="Views\Advertisements\Show.cshtml" />
+    <Content Include="Views\Error\PageNotFound.cshtml" />
+    <Content Include="Views\Error\InternalServerError.cshtml" />
+    <Content Include="Views\Error\PageUnauthorized.cshtml" />
+    <Content Include="Views\Error\BadRequest.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

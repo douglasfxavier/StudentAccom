@@ -69,7 +69,6 @@ namespace StudentAccom.Controllers {
         [Route("Accommodation/Details/{id:int}")]
         public ActionResult Details(int? id) {
 
-            //Add validation: it can be shown anonymously (seen by students) only if it was approved by the AccommodationOfficer
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -85,7 +84,7 @@ namespace StudentAccom.Controllers {
             //In case the accommodation exists, but the user is not logged in (possible customer/student)
             //The business rule says that students can see only the advertisments once approved
             if (!Request.IsAuthenticated && !accom.Status.Equals(Status.Approved)) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
             }
 
 
@@ -110,11 +109,12 @@ namespace StudentAccom.Controllers {
         [HttpGet]
         //This method load the view with the form to edit a giver accommodation advertisement
         public ActionResult Edit(int id) {
+            
             DBContext = new StudentAccomContext();
             Accommodation accom = DBContext.AccommodationsDB.Find(id);
 
             if (Request.IsAuthenticated && !accom.LandlordID.Equals(User.Identity.GetUserId()) && !User.IsInRole("Admin")){
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
             return View(accom);
         }
