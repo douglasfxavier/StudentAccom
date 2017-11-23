@@ -321,7 +321,6 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Accommodation\Delete.cshtml" />
-    <Content Include="Views\Accommodation\Review.cshtml" />
     <Content Include="Views\Advertisements\List.cshtml" />
     <Content Include="Views\Advertisements\Show.cshtml" />
     <Content Include="Views\Error\PageNotFound.cshtml" />
