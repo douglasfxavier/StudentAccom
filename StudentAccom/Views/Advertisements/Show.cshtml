@@ -14,9 +14,10 @@
 
             }
             @foreach (var accom in Model) {
-                <div class="ad col-md-4 text-center">
-                    <a href="../Accommodation/Details/@accom.ID">
-                        <img class="img-thumbnail" alt="@accom.Title" src="data:accom.Images.ElementAt(0).MimeType;base64, @Convert.ToBase64String(accom.Images.ElementAt(0).ImageData)" />
+                <div class="ad-col col-md-4">
+                <div class="img-thumbnail text-center">
+                    <a class="img-responsive-custom" href="../Accommodation/Details/@accom.ID">
+                        <img class="ad-box-img" alt="@accom.Title" src="data:accom.Images.ElementAt(0).MimeType;base64, @Convert.ToBase64String(accom.Images.ElementAt(0).ImageData)" />
                     </a>
                     <div class="ad-box">
                         <a href="../Accommodation/Details/@accom.ID">
@@ -25,7 +26,7 @@
                         <p>@accom.Location</p>
                         <p><span class="pound-sign">&pound; </span><span class="ad-box-price">@accom.Price</span><span>/ @accom.TypeRent</span></p>
                     </div>
-
+                </div>
                 </div>
             }
         </section>
