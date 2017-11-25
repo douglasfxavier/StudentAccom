@@ -10,7 +10,7 @@
 
 </head>
 <body class="page-background">
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -47,14 +47,16 @@
     </div>
     <div class="container body-content body-margin">
         @RenderBody()
-        <hr />
-        <footer class="foot-margin">
+    </div>
+    <div class="container body-content body-margin">
+        <footer>
             <p>&copy; @DateTime.Now.Year - Douglas & Autumn</p>
         </footer>
+   
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
 </body>
 </html>

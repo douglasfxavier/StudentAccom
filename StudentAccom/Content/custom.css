@@ -1,5 +1,5 @@
 ﻿.page-background {
-    background-color: #f2f2f2;
+    background-color: #f5f8fa;
 }
 
 .body-margin {
@@ -18,6 +18,14 @@
 
 .ad-box {
     height: 300px;
+    background-color: #ffffff;
+}
+
+
+.ad-col {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 15px;
 }
 
 .ad-img {
@@ -28,6 +36,10 @@
 .ad-box-img {
     width: 304px;
     height: 236px;
+    padding: 10px;
+    padding-bottom: 15px;
+    overflow: hidden;
+    margin-bottom: 15px;
 }
 
 .ad-box-title{

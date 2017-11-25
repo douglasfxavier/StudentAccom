@@ -12,14 +12,16 @@
         <section class="col-md-12 ads-container" id="MainSection" title="Accommodation advertisements">
             
             @foreach (var accom in Model.Accommodations) {
-                <div class="ad-box col-md-4 text-center" style="height:420px;">
-                    <a href="../Accommodation/Details/@accom.ID">
-                        @if(accom.Images.Count > 0) { 
-                            <img class="ad-box-img"  alt="@accom.Title" src="data:accom.Images.ElementAt(0).MimeType;base64, @Convert.ToBase64String(accom.Images.ElementAt(0).ImageData)" />
-                        } else {
-                            <img class="ad-box-img" alt="No image" src="~/Images/no-image.png" />
-                        }
-                    </a>
+                <div class="ad-col col-md-4" style="height:420px;">
+                    <div class="img-thumbnail text-center">
+                        <a class="img-responsive-custom" href="../Accommodation/Details/@accom.ID">
+                            @if (accom.Images.Count > 0) {
+                                <img class="ad-box-img" alt="@accom.Title" src="data:accom.Images.ElementAt(0).MimeType;base64, @Convert.ToBase64String(accom.Images.ElementAt(0).ImageData)" />
+                            } else {
+                                <img class="ad-box-img" alt="No image" src="~/Images/no-image.png" />
+                            }
+                        </a>
+                    </div>
                     <div class="ad-box">
                         <a href="../Accommodation/Details/@accom.ID">
                             <p class="ad-box-title"><strong>@accom.Title</strong></p>
