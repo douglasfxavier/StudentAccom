@@ -12,8 +12,8 @@
         <section class="col-md-12 ads-container" id="MainSection" title="Accommodation advertisements">
             
             @foreach (var accom in Model.Accommodations) {
-                <div class="ad-col col-md-4" style="height:420px;">
-                    <div class="img-thumbnail text-center">
+                <div class="ad-col col-md-4 text-center" style="height:420px;">
+                    <div class="img-thumbnail">
                         <a class="img-responsive-custom" href="../Accommodation/Details/@accom.ID">
                             @if (accom.Images.Count > 0) {
                                 <img class="ad-box-img" alt="@accom.Title" src="data:accom.Images.ElementAt(0).MimeType;base64, @Convert.ToBase64String(accom.Images.ElementAt(0).ImageData)" />
@@ -33,7 +33,9 @@
             }
             @if (Model.Accommodations.Count == 0 && (Model.Search == "" || Model.Search == null)) {
                 <h1>There's no advertisement to show right now. If you are a Landord register yourself and create your own ads.</h1>
-            } else {
+            } else if (Model.Accommodations.Count == 0 && (Model.Search != "" || Model.Search != null)) {
+                <h1>No results for <span class="keyword">"@Model.Search"</span>. Try other keywords.</h1>
+            }else{
                 <div class="col-md-12">
                     Page @(Model.Accommodations.PageCount < Model.Accommodations.PageNumber ? 0 :
                     Model.Accommodations.PageNumber) of @Model.Accommodations.PageCount

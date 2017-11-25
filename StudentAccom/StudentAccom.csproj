@@ -243,6 +243,7 @@
     <Content Include="Images\commercial-activities-icon.png" />
     <Content Include="Images\doorman-icon.png" />
     <Content Include="Images\drying-machine-icon.png" />
+    <Content Include="Images\favicon.svg" />
     <Content Include="Images\gym-icon.png" />
     <Content Include="Images\heating-icon.png" />
     <Content Include="Images\internet-icon.png" />

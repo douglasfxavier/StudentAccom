@@ -26,25 +26,32 @@
                     <span>@Html.ActionLink("Delete", "Delete", new { id = accom.ID })</span>
                 </div>
             }
-            <div class="body-margin" title="Basic information about the accommodation">                
-                <p>Landlord: @landlordFullName</p>
-                @if (landlordCompany != null && landlordCompany != "") {
-                    <p>Company: @landlordCompany</p>
-                }
-                <p>Email: @landlordEmail</p>
-                @if (landlordPhoneNumber != null && landlordPhoneNumber != "") {
-                    <p>Phone Number: @landlordPhoneNumber</p>
-                }
-                <p>Type of accommodation: @accom.TypeAccom</p>
-                <p>Description: @accom.Description</p>
-                <p>Location: @accom.Location</p>
-                <p>Price: &pound; @accom.Price</p>
-                <p>Type of rent: @accom.TypeRent</p>
-                <p>Cleaning fee: @accom.CleaningFee</p>
-                <p>Security deposit: @accom.SecurityDeposit</p>                
+             <div class="body-margin" title="Basic information about the accommodation">
+                 <h2>Landlord information</h2>
+                 <br />
+                 <p><span class="field-name">Name: </span>@landlordFullName</p>
+                 @if (landlordCompany != null && landlordCompany != "") {
+                     <p><span class="field-name">Company: </span> @landlordCompany</p>
+                 }
+                 <p><span class="field-name">Email: </span>@landlordEmail</p>
+                 @if (landlordPhoneNumber != null && landlordPhoneNumber != "") {
+                     <p><span class="field-name">Phone Number: </span>@landlordPhoneNumber</p>
+                 }
+             </div>
+            <div class="topic-margin" title="Accommodation details">
+                <h2>Accommodation details</h2>
+                <br />
+                <p><span class="field-name">Type of accommodation: </span>@accom.TypeAccom</p>
+                <p><span class="field-name">Description: </span>@accom.Description</p>
+                <p><span class="field-name">Location: </span>@accom.Location</p>
+                <p><span class="field-name">Price: </span>@accom.Price</p>
+                <p><span class="field-name">Type of rent: </span>@accom.TypeRent</p>
+                <p><span class="field-name">Cleaning fee: </span>@accom.CleaningFee</p>
+                <p><span class="field-name">Security deposit: </span>@accom.SecurityDeposit</p>                
             </div>
 
-            <div title="Additional features in the accommodation">
+            <div class="topic-margin" title="Additional features in the accommodation">
+                <h2>Additional features</h2>
                 @if (@accom.Internet) {
                     <p class="col-md-4"><span><img src="~/Images/internet-icon.png" alt="Internet icon" />   Internet</span></p>
                 }
@@ -89,24 +96,33 @@
                 }
             </div>
             @if (Request.IsAuthenticated && User.IsInRole("AccommodationOfficer") && accom.Status == StudentAccom.Models.Status.UnderReview) {
-                <section title="Accommodation Officer Review">
-                    <h1>Accommodation Office Review</h1>
+                <div title="Accommodation Officer Review" class="generic-margin">
+                    <h1 class="review">Accommodation Office Review</h1>
                     <form action="../../Accommodation/Review" method="post">
                         <div>
                             <input hidden name="Accommodation_ID" value="@accom.ID" />
                             <textarea class="form-control vresize" name="textAreaComment" id="textAreaComment" style="resize:none;" rows="10" placeholder="Advertisement Review"></textarea>
+                            <br />
                             <input name="btnReview" class="btn btn-danger" type="submit" value="Reject" />
                             <input name="btnReview" class="btn btn-success" type="submit" value="Approve" />
                         </div>
                     </form>                    
-                </section>
+                </div>
             } else if (Request.IsAuthenticated && User.IsInRole("AccommodationOfficer") && accom.Status != StudentAccom.Models.Status.UnderReview) {
-                <h1>Accommodation Office Review</h1>
-                <p><b>Status: </b>@accom.Status</p>
-                <b>Comment: </b>
-                <p>@accom.Comment</p>
-            }
+                <div title="Accommodation Officer Review" class="generic-margin">
+                    <h1 class="review">Accommodation Office Review</h1>
+                    <p><b>Status: </b>@accom.Status</p>
+                    @if (accom.Comment != null && accom.Comment != ""){
+                        <b>Comment: </b>
+                        <p>@accom.Comment</p>
+                    } else {
+                        <p>The officer has not written a comment for this advertisement.</p>
+                    }
+
+                </div>
+             }
         </div>
+
         <div class="body-margin col-md-5" title="Images">
             @if (accom.Images.Count > 1) {
                 <div id="details-carousel" class="carousel slide" data-ride="carousel">
@@ -153,6 +169,7 @@
                     <img src="~/Images/no-image.png" alt="No image" />
                 </div>
             }
+        </div>
     </section>
 </body>
 </html>
