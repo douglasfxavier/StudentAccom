@@ -6,7 +6,7 @@ using StudentAccom.DAL;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity;
 using System.Net;
-
+using System.IO;
 
 namespace StudentAccom.Controllers {
 
@@ -33,6 +33,7 @@ namespace StudentAccom.Controllers {
         [HttpPost]
         //This method does the validation checks and post the values from and, when there's no erros, persist the data into the database
         public ActionResult Create(Accommodation a, HttpPostedFileBase[] SelectedImages) {
+
             if (ModelState.IsValid) {                
                 DBContext = new StudentAccomContext();            
                 var userId = User.Identity.GetUserId();
@@ -41,7 +42,7 @@ namespace StudentAccom.Controllers {
                 DBContext.AccommodationsDB.Add(a);
 
                 //Persistence of images into the database
-                if (SelectedImages != null) {
+                if (SelectedImages[0] != null ) {
                     foreach (var file in SelectedImages) {
                         Image img = new Image {
                             Accommodation = a,
@@ -51,7 +52,7 @@ namespace StudentAccom.Controllers {
                         file.InputStream.Read(img.ImageData, 0, img.ImageData.Length);
                         DBContext.ImagesDB.Add(img);
                     }
-                }
+                } 
 
                 DBContext.SaveChanges();
 
@@ -123,7 +124,7 @@ namespace StudentAccom.Controllers {
 
         //This method sends the POST message with the changes in the given accommodation
         [HttpPost, ActionName("Edit")]
-        public ActionResult Edit(int id, Accommodation a) {
+        public ActionResult Edit(int id, Accommodation a, HttpPostedFileBase[] SelectedImages) {
             if (ModelState.IsValid) {
 
                 DBContext = new StudentAccomContext();
@@ -131,6 +132,27 @@ namespace StudentAccom.Controllers {
                 DBContext.Entry(a).State = EntityState.Modified;
                 DBContext.SaveChanges();
 
+                //If new images uploaded, remove old images and persist new images into the database
+                if (SelectedImages[0] != null ) {
+                    DBContext = new StudentAccomContext();
+                    Accommodation persistedAccom = DBContext.AccommodationsDB.Find(id);
+                    if (persistedAccom.Images.Count > 0) { 
+                        DBContext.ImagesDB.RemoveRange(persistedAccom.Images);
+                    }
+
+                    foreach (var file in SelectedImages) {
+                        Image img = new Image {
+                            Accommodation = persistedAccom,
+                            ImageData = new byte[file.ContentLength],
+                            MimeType = file.ContentType
+                        };
+                        file.InputStream.Read(img.ImageData, 0, img.ImageData.Length);
+                        DBContext.ImagesDB.Add(img);
+                    }
+
+                    DBContext.SaveChanges();
+                }
+                
                 return RedirectToAction("Details/"+id);
             } else {
                 //When validation fails, redisplay the form

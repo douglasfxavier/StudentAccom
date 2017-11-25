@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using PagedList;
 
 namespace StudentAccom.Models {
     public class ViewModel {
@@ -12,5 +13,14 @@ namespace StudentAccom.Models {
         [Required(AllowEmptyStrings=false)]
         [Display(Name = "Role Name")]
         public string Name { get; set; }
+    }
+
+    public class AccomLandlord {
+        public IPagedList<Accommodation> Accommodations { set; get; }
+        public IDictionary<string,string> Landlords { set; get; }
+        public string Search { set; get; }
+        public string Status { set; get; }
+        public string SortBy { set; get; }
+
     }
 }

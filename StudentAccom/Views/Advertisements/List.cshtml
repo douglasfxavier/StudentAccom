@@ -1,4 +1,5 @@
-﻿@model StudentAccom.Models.Accommodation
+﻿@model  StudentAccom.Models.AccomLandlord
+@using PagedList.Mvc
 
 @{
     if (User.IsInRole("Landlord")) {
@@ -6,10 +7,6 @@
     } else {
         ViewBag.Title = "All Advertisements";
     }
-
-    Dictionary<string, string> Landlords = (Dictionary<string, string>) ViewData["Landlords"];
-    IEnumerable<StudentAccom.Models.Accommodation> Accommodations = (IEnumerable<StudentAccom.Models.Accommodation>) ViewData["Accommodations"];
-
 }
 
 
@@ -31,29 +28,29 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.Accommodations.First().Title)
             </th>
             <th>
                 Type
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Location)
+                @Html.DisplayNameFor(model => model.Accommodations.First().Location)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                @Html.DisplayNameFor(model => model.Accommodations.First().Price)
             </th>
             <th>
                 Landlord/Company
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                @Html.DisplayNameFor(model => model.Accommodations.First().Status)
             </th>
             <th>
                 Actions
             </th>
         </tr>
 
-        @foreach (var accom in Accommodations) {
+        @foreach (var accom in Model.Accommodations) {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => accom.Title)
@@ -68,7 +65,7 @@
                     &pound; @Html.DisplayFor(modelItem => accom.Price) / @Html.DisplayFor(modelItem => accom.TypeRent)
                 </td>
                 <td>
-                    @Landlords[accom.LandlordID]
+                    @Model.Landlords[accom.LandlordID]
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => accom.Status)
@@ -81,9 +78,18 @@
                         <span> | </span>
                         @Html.ActionLink("Delete", "../Accommodation/Delete", new { id = accom.ID })
                     }
-
                 </td>
             </tr>
         }
     </table>
+    <div>
+        Page @(Model.Accommodations.PageCount < Model.Accommodations.PageNumber ? 0 : 
+                Model.Accommodations.PageNumber) of @Model.Accommodations.PageCount
+        @Html.PagedListPager(Model.Accommodations,
+            page => Url.Action("List", new { Status = @Model.Status,
+                Search = @Model.Search,
+                SortBy = @Model.SortBy,
+                Page = page
+            }))
+    </div>
 </div>

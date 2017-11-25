@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - StudentAccom</title>
-    @Styles.Render("~/Content/bootstrap.css")   
+    @Styles.Render("~/Content/bootstrap.css")
     @Styles.Render("~/Content/custom.css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -23,7 +23,6 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Show", "Advertisements")</li>
-                    
                     @if (Request.IsAuthenticated && User.IsInRole("Landlord")) {
                         <li>@Html.ActionLink("My advertisements", "List", "Advertisements")</li>
                         <li>@Html.ActionLink("New Advertisement", "Create", "Accommodation")</li>
@@ -31,17 +30,22 @@
                         <li>@Html.ActionLink("All advertisements", "List", "Advertisements")</li>
                     }
                 </ul>
-                @using (Html.BeginForm("List", "Advertisements", FormMethod.Get, new { @class = "navbar-form navbar-left" })) {
+                @{var page = "List"; }
+                @if (Request.Url.LocalPath.Equals("/Advertisements/Show")) {
+                    page = "Show";
+                }
+                @using (Html.BeginForm(page, "Advertisements", FormMethod.Get, new { @class = "navbar-form navbar-left" })) {
                     <div class="form-group">
                         @Html.TextBox("Search", null, new { @class = "form-control", @placeholder = "Type keywords" })
                     </div>
-                    <button type="submit" class="btn btn-default">Search</button>
+                    <button title="search" type="submit" class="btn btn-default">Search</button>
                 }
+
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-    <div class="container body-content body-margin" >
+    <div class="container body-content body-margin">
         @RenderBody()
         <hr />
         <footer class="foot-margin">

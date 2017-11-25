@@ -8,25 +8,31 @@
 
 .ads-container {
     padding-bottom: 10%;
-}
-
-.ad-box{
     background-color: #ffffff;
-}
-
-.ad-box-img{
-    width:304px;
-    height:236px;
-}
-
-.ad-box-title{
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size:large; 
 }
 
 .pound-sign {
     font-family: 'Cambria Math';
     font-size: x-large;
+}
+
+.ad-box {
+    height: 300px;
+}
+
+.ad-img {
+    width: 304px;
+    height: 236px;
+}
+
+.ad-box-img {
+    width: 304px;
+    height: 236px;
+}
+
+.ad-box-title{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size:large; 
 }
 
 .ad-box-price {

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<StudentAccom.Models.Accommodation>
+﻿@model  StudentAccom.Models.AccomLandlord
+@using PagedList.Mvc
 
 @{
     ViewBag.Title = "Accommodation Advertisements";
@@ -9,14 +10,15 @@
     </head>
     <body>
         <section class="col-md-12 ads-container" id="MainSection" title="Accommodation advertisements">
-            @if (Model == null || Model.ToArray().Length == 0) {
-                <h1>There's no advertisement to show right now. If you are a Landord register yourself and create your own ads.</h1>
-
-            }
-            @foreach (var accom in Model) {
-                <div class="ad col-md-4 text-center">
+            
+            @foreach (var accom in Model.Accommodations) {
+                <div class="ad-box col-md-4 text-center" style="height:420px;">
                     <a href="../Accommodation/Details/@accom.ID">
-                        <img class="img-thumbnail" alt="@accom.Title" src="data:accom.Images.ElementAt(0).MimeType;base64, @Convert.ToBase64String(accom.Images.ElementAt(0).ImageData)" />
+                        @if(accom.Images.Count > 0) { 
+                            <img class="ad-box-img"  alt="@accom.Title" src="data:accom.Images.ElementAt(0).MimeType;base64, @Convert.ToBase64String(accom.Images.ElementAt(0).ImageData)" />
+                        } else {
+                            <img class="ad-box-img" alt="No image" src="~/Images/no-image.png" />
+                        }
                     </a>
                     <div class="ad-box">
                         <a href="../Accommodation/Details/@accom.ID">
@@ -25,7 +27,20 @@
                         <p>@accom.Location</p>
                         <p><span class="pound-sign">&pound; </span><span class="ad-box-price">@accom.Price</span><span>/ @accom.TypeRent</span></p>
                     </div>
-
+                </div>
+            }
+            @if (Model.Accommodations.Count == 0 && (Model.Search == "" || Model.Search == null)) {
+                <h1>There's no advertisement to show right now. If you are a Landord register yourself and create your own ads.</h1>
+            } else {
+                <div class="col-md-12">
+                    Page @(Model.Accommodations.PageCount < Model.Accommodations.PageNumber ? 0 :
+                    Model.Accommodations.PageNumber) of @Model.Accommodations.PageCount
+                    @Html.PagedListPager(Model.Accommodations,
+                         page => Url.Action("Show", new {
+                             Search = Model.Search,
+                             Sortby = Model.SortBy,
+                             Page = page
+                         }))
                 </div>
             }
         </section>
