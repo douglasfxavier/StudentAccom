@@ -209,8 +209,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\Configuration.cs" />
-    <Compile Include="App_Start\StudentAccomConfiguration.cs" />
+    <Compile Include="Migrations\201711270228315_twocontextreset.cs" />
+    <Compile Include="Migrations\201711270228315_twocontextreset.Designer.cs">
+      <DependentUpon>201711270228315_twocontextreset.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\StudentAccomConfiguration.cs" />
     <Compile Include="Models\Accommodation.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -243,7 +247,7 @@
     <Content Include="Images\commercial-activities-icon.png" />
     <Content Include="Images\doorman-icon.png" />
     <Content Include="Images\drying-machine-icon.png" />
-    <Content Include="Images\favicon.svg" />
+    <Content Include="Images\favicon.png" />
     <Content Include="Images\gym-icon.png" />
     <Content Include="Images\heating-icon.png" />
     <Content Include="Images\internet-icon.png" />
@@ -336,6 +340,11 @@
     <Content Include="Views\Error\InternalServerError.cshtml" />
     <Content Include="Views\Error\PageUnauthorized.cshtml" />
     <Content Include="Views\Error\BadRequest.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201711270228315_twocontextreset.resx">
+      <DependentUpon>201711270228315_twocontextreset.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

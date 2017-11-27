@@ -12,84 +12,92 @@
 
 
 <h2>@ViewBag.Title</h2>
+<html>
+    <head>
+    </head>
+    <body>
+        <section name="List of accommodation advertisments">
+            <p class="link-right">
+                @if (Request.IsAuthenticated && User.IsInRole("Landlord")) {
+                    @Html.ActionLink("New Advertisement", "../Accommodation/Create")
+                }
+            </p>
+            @using (Html.BeginForm("List", "Advertisements", FormMethod.Get)) {
+                <label>Filter by status</label> @Html.DropDownList("Status", "All");
+                <input type="submit" value="Filter" />
+                <input type="hidden" name="Search" id="Search" value="@ViewBag.Search" />
+            }
 
-<p class="link-right">
-    @if (Request.IsAuthenticated && User.IsInRole("Landlord")) {
-        @Html.ActionLink("New Advertisement", "../Accommodation/Create")
-    }
-</p>
-@using (Html.BeginForm("List", "Advertisements", FormMethod.Get)) {
-    <label>Filter by status</label> @Html.DropDownList("Status", "All");
-    <input type="submit" value="Filter" />
-    <input type="hidden" name="Search" id="Search" value="@ViewBag.Search" />
-}
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Accommodations.First().Title)
+                        </th>
+                        <th>
+                            Type
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Accommodations.First().Location)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Accommodations.First().Price)
+                        </th>
+                        <th>
+                            Landlord/Company
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Accommodations.First().Status)
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
 
-<div class="table-responsive">
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Accommodations.First().Title)
-            </th>
-            <th>
-                Type
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Accommodations.First().Location)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Accommodations.First().Price)
-            </th>
-            <th>
-                Landlord/Company
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Accommodations.First().Status)
-            </th>
-            <th>
-                Actions
-            </th>
-        </tr>
-
-        @foreach (var accom in Model.Accommodations) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => accom.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => accom.TypeAccom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => accom.Location)
-                </td>
-                <td>
-                    &pound; @Html.DisplayFor(modelItem => accom.Price) / @Html.DisplayFor(modelItem => accom.TypeRent)
-                </td>
-                <td>
-                    @Model.Landlords[accom.LandlordID]
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => accom.Status)
-                </td>
-                <td>
-                    @Html.ActionLink("Details", "../Accommodation/Details", new { id = accom.ID })
-                    @if (Request.IsAuthenticated && User.IsInRole("Landlord")) {
-                        <span> | </span>
-                        @Html.ActionLink("Edit", "../Accommodation/Edit", new { id = accom.ID })
-                        <span> | </span>
-                        @Html.ActionLink("Delete", "../Accommodation/Delete", new { id = accom.ID })
+                    @foreach (var accom in Model.Accommodations) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => accom.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => accom.TypeAccom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => accom.Location)
+                            </td>
+                            <td>
+                                &pound; @Html.DisplayFor(modelItem => accom.Price) / @Html.DisplayFor(modelItem => accom.TypeRent)
+                            </td>
+                            <td>
+                                @Model.Landlords[accom.LandlordID]
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => accom.Status)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Details", "../Accommodation/Details", new { id = accom.ID })
+                                @if (Request.IsAuthenticated && User.IsInRole("Landlord")) {
+                                    <span> | </span>
+                                    @Html.ActionLink("Edit", "../Accommodation/Edit", new { id = accom.ID })
+                                    <span> | </span>
+                                    @Html.ActionLink("Delete", "../Accommodation/Delete", new { id = accom.ID })
+                                }
+                            </td>
+                        </tr>
                     }
-                </td>
-            </tr>
-        }
-    </table>
-    <div>
-        Page @(Model.Accommodations.PageCount < Model.Accommodations.PageNumber ? 0 : 
-                Model.Accommodations.PageNumber) of @Model.Accommodations.PageCount
-        @Html.PagedListPager(Model.Accommodations,
-            page => Url.Action("List", new { Status = @Model.Status,
-                Search = @Model.Search,
-                SortBy = @Model.SortBy,
-                Page = page
-            }))
-    </div>
-</div>
+                </table>
+                <div>
+                    Page @(Model.Accommodations.PageCount < Model.Accommodations.PageNumber ? 0 :
+                    Model.Accommodations.PageNumber) of @Model.Accommodations.PageCount
+                    @Html.PagedListPager(Model.Accommodations,
+                page => Url.Action("List", new {
+                    Status = @Model.Status,
+                    Search = @Model.Search,
+                    SortBy = @Model.SortBy,
+                    Page = page
+                }))
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

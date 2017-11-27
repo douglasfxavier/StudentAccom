@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <section title="Accommodation details" class="col-md-12">
+    <section name="Accommodation details" class="col-md-12">
          <div class="col-md-7">
             <h1><strong>@accom.Title</strong></h1>
             @if (Request.IsAuthenticated && User.IsInRole("Landlord") && currentUserId.Equals(accom.LandlordID)) {
@@ -26,7 +26,117 @@
                     <span>@Html.ActionLink("Delete", "Delete", new { id = accom.ID })</span>
                 </div>
             }
-             <div class="body-margin" title="Basic information about the accommodation">
+
+            <div class="col-md-12" title="Accommodation details">
+                <br />
+                <p><span class="field-name">Location: </span>@accom.Location</p>
+                <p><span class="field-name">Type of accommodation: </span>@accom.TypeAccom</p>
+                <p><span class="field-name">Description: </span>@accom.Description</p>
+                <p><span class="field-name">Price: </span>&pound; @accom.Price</p>
+                <p><span class="field-name">Type of rent: </span>@accom.TypeRent</p>
+                <p><span class="field-name">Cleaning fee: </span>&pound; @accom.CleaningFee</p>
+                <p><span class="field-name">Security deposit: </span>&pound; @accom.SecurityDeposit</p>                
+            </div>
+
+            <div class="col-md-12 body-margin" title="Additional features in the accommodation">
+                <h2>Additional features</h2>
+                @if (@accom.Internet) {
+                    <div class="col-md-4">
+                        <p><span><img src="~/Images/internet-icon.png" alt="Internet icon" />   Internet</span></p>
+                     </div>
+                }
+                @if (@accom.Wifi) {
+                    <div class="col-md-4">
+                        <p><span><img src="~/Images/wifi-icon.png" alt="Wi-fi icon" />   Wi-fi</span></p>
+                    </div>
+                }
+                @if (@accom.CableTV) {
+                   <div class="col-md-4">
+                        <p><span><img src="~/Images/cable-tv-icon.png" alt="Cable TV icon" />   Cable TV</span></p>
+                    </div>
+                }
+                @if (@accom.TV) {
+                    <div class="col-md-4">
+                        <p><span><img src="~/Images/tv-icon.png" alt="TV icon" />   TV</span></p>
+                    </div>
+                }
+                @if (@accom.Doorman) {
+                    <div class="col-md-4">
+                        <p><span><img src="~/Images/doorman-icon.png" alt="Doorman icon" />   Doorman</span></p>
+                    </div>
+                }
+                @if (@accom.Kitchen) {
+                    <div class="col-md-4">
+                        <p><span><img src="~/Images/kitchen-icon.png" alt="Kitchen icon" />   Kitchen</span></p>
+                    </div>
+                }
+                @if (@accom.IndividualBathroom) {
+                    <div class="col-md-4">
+                        <p><span><img src="~/Images/bathroom-icon.png" alt="Bathroom icon" />   Individual bathroom</span></p>
+                    </div>
+                }
+                @if (@accom.SharedBathroom) {
+                    <div class="col-md-4">
+                        <p><span><img src="~/Images/bathroom-icon.png" alt="Bathroom icon" />   Shared bathroom</span></p>
+                    </div>
+                }
+                @if (@accom.Heating) {
+                    <div class="col-md-4">
+                        <p><span><img src="~/Images/heating-icon.png" alt="Heating icon" />   Heating</span></p>
+                    </div>
+                }
+                @if (@accom.AirConditioning) {
+                    <div class="col-md-4">
+                        <p><span><img src="~/Images/air-conditioning-icon.png" alt="Air-conditioning icon" />   Air-conditioning</span></p>
+                    </div>
+                }
+                @if (@accom.WashingMachine) {
+                    <div class="col-md-4">
+                        <p><span><img src="~/Images/washing-machine-icon.png" alt="Washing machine icon" />   Washing machine</span></p>
+                    </div>
+                }
+                @if (@accom.DryingMachine) {
+                    <div class="col-md-4">
+                        <p><span><img src="~/Images/drying-machine-icon.png" alt="Drying machine icon" />   Drying machine</span></p>
+                    </div>
+                }
+                @if (@accom.Pool) {
+                    <div class="col-md-4">
+                        <p><span><img src="~/Images/pool-icon.png" alt="Pool icon" />   Pool</span></p>
+                    </div>
+                }
+                @if (@accom.Gym) {
+                    <div class="col-md-4">
+                        <p><span><img src="~/Images/gym-icon.png" alt="Gym icon" />   Gym</span></p>
+                    </div>
+                }
+             </div>
+
+             <div class="col-md-12 body-margin" title="Permitted items and activities">
+                 <h2>Permitted items and activitiess</h2>
+                 @if (@accom.Smoking) {
+                     <div class="col-md-4">
+                         <p><span><img src="~/Images/smoking-icon.png" alt="Smoking icon" />   Smoking</span></p>
+                     </div>
+                 }
+                 @if (@accom.Parties) {
+                     <div class="col-md-4">
+                         <p><span><img src="~/Images/party-icon.png" alt="Parties icon" />   Parties</span></p>
+                     </div>
+                 }
+                 @if (@accom.Pets) {
+                     <div class="col-md-4">
+                         <p><span><img src="~/Images/pets-icon.png" alt="Pets icon" />   Pets</span></p>
+                     </div>
+                 }
+                 @if (@accom.CommercialActivities) {
+                     <div class="col-md-4">
+                         <p><span><img src="~/Images/commercial-activities-icon.png" alt="Commercial activities icon" />   Commercial activities</span></p>
+                     </div>
+                 }
+             </div>
+
+             <div class="col-md-12 body-margin" title="Basic information about the accommodation">
                  <h2>Landlord information</h2>
                  <br />
                  <p><span class="field-name">Name: </span>@landlordFullName</p>
@@ -38,65 +148,9 @@
                      <p><span class="field-name">Phone Number: </span>@landlordPhoneNumber</p>
                  }
              </div>
-            <div class="topic-margin" title="Accommodation details">
-                <h2>Accommodation details</h2>
-                <br />
-                <p><span class="field-name">Type of accommodation: </span>@accom.TypeAccom</p>
-                <p><span class="field-name">Description: </span>@accom.Description</p>
-                <p><span class="field-name">Location: </span>@accom.Location</p>
-                <p><span class="field-name">Price: </span>&pound; @accom.Price</p>
-                <p><span class="field-name">Type of rent: </span>@accom.TypeRent</p>
-                <p><span class="field-name">Cleaning fee: </span>&pound; @accom.CleaningFee</p>
-                <p><span class="field-name">Security deposit: </span>&pound; @accom.SecurityDeposit</p>                
-            </div>
 
-            <div class="topic-margin" title="Additional features in the accommodation">
-                <h2>Additional features</h2>
-                @if (@accom.Internet) {
-                    <p class="col-md-4"><span><img src="~/Images/internet-icon.png" alt="Internet icon" />   Internet</span></p>
-                }
-                @if (@accom.Wifi) {
-                    <p class="col-md-4"><span><img src="~/Images/wifi-icon.png" alt="Wi-fi icon" />   Wi-fi</span></p>
-                }
-                @if (@accom.CableTV) {
-                    <p class="col-md-4"><span><img src="~/Images/cable-tv-icon.png" alt="Cable TV icon" />   Cable TV</span></p>
-                }
-                @if (@accom.TV) {
-                    <p class="col-md-4"><span><img src="~/Images/tv-icon.png" alt="TV icon" />   TV</span></p>
-                }
-                @if (@accom.Doorman) {
-                    <p class="col-md-4"><span><img src="~/Images/doorman-icon.png" alt="Doorman icon" />   Doorman</span></p>
-                }
-                @if (@accom.Kitchen) {
-                    <p class="col-md-4"><span><img src="~/Images/kitchen-icon.png" alt="Kitchen icon" />   Kitchen</span></p>
-                }
-                @if (@accom.IndividualBathroom) {
-                    <p class="col-md-4"><span><img src="~/Images/bathroom-icon.png" alt="Bathroom icon" />   Individual bathroom</span></p>
-                }
-                @if (@accom.SharedBathroom) {
-                    <p class="col-md-4"><span><img src="~/Images/bathroom-icon.png" alt="Bathroom icon" />   Shared bathroom</span></p>
-                }
-                @if (@accom.Heating) {
-                    <p class="col-md-4"><span><img src="~/Images/heating-icon.png" alt="Heating icon" />   Heating</span></p>
-                }
-                @if (@accom.AirConditioning) {
-                    <p class="col-md-4"><span><img src="~/Images/air-conditioning-icon.png" alt="Air-conditioning icon" />   Air-conditioning</span></p>
-                }
-                @if (@accom.WashingMachine) {
-                    <p class="col-md-4"><span><img src="~/Images/washing-machine-icon.png" alt="Washing machine icon" />   Washing machine</span></p>
-                }
-                @if (@accom.DryingMachine) {
-                    <p class="col-md-4"><span><img src="~/Images/drying-machine-icon.png" alt="Drying machine icon" />   Drying machine</span></p>
-                }
-                @if (@accom.Pool) {
-                    <p class="col-md-4"><span><img src="~/Images/pool-icon.png" alt="Pool icon" />   Pool</span></p>
-                }
-                @if (@accom.Gym) {
-                    <p class="col-md-4"><span><img src="~/Images/gym-icon.png" alt="Gym icon" />   Gym</span></p>
-                }
-            </div>
             @if (Request.IsAuthenticated && User.IsInRole("AccommodationOfficer") && accom.Status == StudentAccom.Models.Status.UnderReview) {
-                <div title="Accommodation Officer Review" class="generic-margin">
+                <div class="col-md-12 generic-margin" title="Accommodation Officer Review">
                     <h1 class="review">Accommodation Office Review</h1>
                     <form action="../../Accommodation/Review" method="post">
                         <div>
@@ -109,7 +163,7 @@
                     </form>                    
                 </div>
             } else if (Request.IsAuthenticated && User.IsInRole("AccommodationOfficer") && accom.Status != StudentAccom.Models.Status.UnderReview) {
-                <div title="Accommodation Officer Review" class="generic-margin">
+                <div class="col-md-12 generic-margin" title="Accommodation Officer Review">
                     <h1 class="review">Accommodation Office Review</h1>
                     <p><b>Status: </b>@accom.Status</p>
                     @if (accom.Comment != null && accom.Comment != ""){
@@ -140,11 +194,11 @@
                     <div class="carousel-inner" role="listbox">
                         @foreach (var img in accom.Images) {
                             if (accom.Images.First() == img) {
-                                <div class="item active">
+                                <div class="img-responsive-custom item active">
                                     <img src="data:@img.MimeType;base64, @Convert.ToBase64String(img.ImageData)" />
                                 </div>
                             } else {
-                                <disv class="item">
+                                <disv class="img-responsive-custom item">
                                     <img src="data:@img.MimeType;base64, @Convert.ToBase64String(img.ImageData)" />
                                 </disv>
                             }
@@ -161,12 +215,16 @@
                 </div>
             } else if (accom.Images.Count == 1) {
                 var img = accom.Images.First();
-                <div class="">
-                    <img src="data:@img.MimeType;base64, @Convert.ToBase64String(img.ImageData)" />
+                <div id="details-carousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner img-responsive-custom">
+                        <img src="data:@img.MimeType;base64, @Convert.ToBase64String(img.ImageData)" />
+                    </div>
                 </div>
             } else {
-                <div class="">
-                    <img src="~/Images/no-image.png" alt="No image" />
+                <div id="details-carousel" class="carousel slide" data-ride="carousel">
+                    <div class="img-responsive-custom">
+                        <img class="details-img" src="~/Images/no-image.png" alt="No image" />
+                    </div>
                 </div>
             }
         </div>

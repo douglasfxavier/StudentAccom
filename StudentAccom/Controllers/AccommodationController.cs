@@ -15,8 +15,9 @@ namespace StudentAccom.Controllers {
 
         private StudentAccomContext DBContext;
         private ApplicationDbContext IdentityContext;
-       
-        
+
+
+
         [Authorize(Roles = "Admin, Landlord")]
         [Route("Accommodation/Create")]
         [HttpGet]
@@ -84,6 +85,7 @@ namespace StudentAccom.Controllers {
 
             //In case the accommodation exists, but the user is not logged in (possible customer/student)
             //The business rule says that students can see only the advertisments once approved
+
             if (!Request.IsAuthenticated && !accom.Status.Equals(Status.Approved)) {
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound);
             }

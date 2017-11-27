@@ -14,9 +14,11 @@ namespace StudentAccom.Models {
         public int ID { set; get; }
 
         [Required]
+        [MaxLength(50)]
         public string Title { set; get; }
 
         [Required]
+        [MaxLength(500)]
         public string Description { set; get; }
         [Required]
 
@@ -25,13 +27,16 @@ namespace StudentAccom.Models {
         public TypeAccom TypeAccom { set; get; }
 
         [Required]
+        [MaxLength(100)]
         public string Location { set; get; }
 
         [Display(Name = "Number of Rooms")]
         [Required]
+        [Range(1,int.MaxValue)]
         public int RoomsNumber { set; get; }
 
         [Required]
+        [Range(0.01, double.MaxValue)]
         public decimal Price { set; get; }
 
         [Display(Name = "Type of Rent")]
@@ -41,9 +46,11 @@ namespace StudentAccom.Models {
 
         //Not required fields
         [Display(Name = "Cleaning Fee")]
+        [Range(0.01, double.MaxValue)]
         public decimal CleaningFee { set; get; }
 
         [Display(Name = "Security Deposit")]
+        [Range(0.01, double.MaxValue)]
         public decimal SecurityDeposit { set; get; }
 
 

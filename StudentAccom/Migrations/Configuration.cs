@@ -18,10 +18,9 @@ namespace StudentAccom.Migrations {
             var roleStore = new RoleStore<IdentityRole>(context);
             var roleManager = new RoleManager<IdentityRole>(roleStore);
 
-            const string adminName = "Admin";
+            const string adminName = "admin@studentaccom.com";
             const string adminPassword = "Admin@1";
             const string adminRoleName = "Admin";
-            const string adminEmail = "admin@studentaccom.com";
 
             //Create Role Admin if it does not exist
             var adminRole = roleManager.FindByName(adminRoleName);
@@ -33,10 +32,10 @@ namespace StudentAccom.Migrations {
             var adminUser = userManager.FindByName(adminName);
             if (adminUser == null) {
                 adminUser = new ApplicationUser {
-                    UserName = adminEmail,
-                    Email = adminEmail,
-                    FirstName = adminName,
-                    LastName = adminName
+                    UserName = adminName,
+                    Email = adminName,
+                    FirstName = "Admin",
+                    LastName = "Admin"
                 };
                 var result = userManager.Create(adminUser, adminPassword);
                 result = userManager.SetLockoutEnabled(adminUser.Id, false);
@@ -68,17 +67,16 @@ namespace StudentAccom.Migrations {
 
             //Create user AccommodationOfficer
 
-            const string officerName = "Officer";
+            const string officerName = "officer@studentaccom.com";
             const string officerPassword = "Officer@1";
-            const string officerEmail = "officer@studentaccom.com";
             var officerUser = userManager.FindByName(officerName);
 
             if (officerUser == null) {
                 officerUser = new ApplicationUser {
-                    UserName = officerEmail,
-                    Email = officerEmail,
-                    FirstName = officerName,
-                    LastName = officerName
+                    UserName = officerName,
+                    Email = officerName,
+                    FirstName = "Accommodation",
+                    LastName = "Officer"
                 };
 
                 var result = userManager.Create(officerUser, officerPassword);

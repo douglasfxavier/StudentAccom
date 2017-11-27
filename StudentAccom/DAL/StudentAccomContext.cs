@@ -11,6 +11,6 @@ namespace StudentAccom.DAL {
     public class StudentAccomContext : DbContext {
         public StudentAccomContext() : base("StudentAccomDB") { }
         public DbSet<Accommodation> AccommodationsDB { set; get; }
-        public DbSet<Image> ImagesDB { set; get; }        
+        public DbSet<Image> ImagesDB { set; get; }
     }
 }
