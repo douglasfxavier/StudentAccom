@@ -26,7 +26,7 @@
                     <span>@Html.ActionLink("Delete", "Delete", new { id = accom.ID })</span>
                 </div>
             }
-            <div class="body-margin" title="Basic information about the accommodation">                
+            <div class="detail-content" title="Basic information about the accommodation">                
                 <p>Landlord: @landlordFullName</p>
                 @if (landlordCompany != null && landlordCompany != "") {
                     <p>Company: @landlordCompany</p>
@@ -44,7 +44,9 @@
                 <p>Security deposit: @accom.SecurityDeposit</p>                
             </div>
 
-            <div title="Additional features in the accommodation">
+            <h3>Features</h3>
+
+            <div class="detail-features" title="Additional features in the accommodation">
                 @if (@accom.Internet) {
                     <p class="col-md-4"><span><img src="~/Images/internet-icon.png" alt="Internet icon" />   Internet</span></p>
                 }
