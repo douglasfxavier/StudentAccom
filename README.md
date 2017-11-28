@@ -2,8 +2,21 @@
 
 Project developed as an assignment for the module Web Development in the MSc Web Technology at University of Southampton.
 
-Team:
+### Team:
 * Douglas Xavier
 * Longqiuyu Huang
 
 2017
+
+## Guidelines
+### How to generate the two context databases with enabled migrations
+
+*1. In the Visual Studio go to the menu Tools > NuGet Package Manager > Package Manager Console*
+*2. Run each one of the following statements:*
+```
+update-database -configuration studentaccomconfiguration
+
+update-database -configuration configuration
+```
+
+:exclamation: Warning: Do it only if you do not have the databases already.
