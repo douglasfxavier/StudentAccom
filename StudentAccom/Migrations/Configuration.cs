@@ -57,7 +57,7 @@ namespace StudentAccom.Migrations {
             }
 
 
-            //Create Role AccomodationOfficer if it does not exist
+            //Creating Role AccommodationOfficer if it does not exist
             const string officerUserRoleName = "AccommodationOfficer";
             var officerRole = roleManager.FindByName(officerUserRoleName);
             if (officerRole == null) {
@@ -65,8 +65,7 @@ namespace StudentAccom.Migrations {
                 var roleresult = roleManager.Create(officerRole);
             }
 
-            //Create user AccommodationOfficer
-
+            //Creating user AccommodationOfficer if it does not exist
             const string officerName = "officer@studentaccom.com";
             const string officerPassword = "Officer@1";
             var officerUser = userManager.FindByName(officerName);

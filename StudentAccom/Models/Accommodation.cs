@@ -46,11 +46,11 @@ namespace StudentAccom.Models {
 
         //Not required fields
         [Display(Name = "Cleaning Fee")]
-        [Range(0.01, double.MaxValue)]
+        [Range(0, double.MaxValue)]
         public decimal CleaningFee { set; get; }
 
         [Display(Name = "Security Deposit")]
-        [Range(0.01, double.MaxValue)]
+        [Range(0, double.MaxValue)]
         public decimal SecurityDeposit { set; get; }
 
 

@@ -110,13 +110,15 @@ namespace StudentAccom.Controllers {
         [Authorize(Roles = "Admin, Landlord")]
         [Route("Accommodation/Edit/{id:int}")]
         [HttpGet]
-        //This method load the view with the form to edit a giver accommodation advertisement
+        //This method loads the view with the form to edit an 
+        //accommodation advertisement by a giver ID
         public ActionResult Edit(int id) {
             
             DBContext = new StudentAccomContext();
             Accommodation accom = DBContext.AccommodationsDB.Find(id);
 
-            if (Request.IsAuthenticated && !accom.LandlordID.Equals(User.Identity.GetUserId()) && !User.IsInRole("Admin")){
+            if (Request.IsAuthenticated && !accom.LandlordID.Equals(User.Identity.GetUserId()) 
+                && !User.IsInRole("Admin")){
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
             return View(accom);
@@ -167,14 +169,21 @@ namespace StudentAccom.Controllers {
         [Authorize(Roles = "Admin, Landlord")]
         [HttpGet]
         public ActionResult Delete(int? id) {
+
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             DBContext = new StudentAccomContext();
-            Accommodation a = DBContext.AccommodationsDB.Find(id);
+            Accommodation accom = DBContext.AccommodationsDB.Find(id);
 
-            return View(a);
+            if (Request.IsAuthenticated && !accom.LandlordID.Equals(User.Identity.GetUserId())
+                && !User.IsInRole("Admin")) {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
+
+            return View(accom);
         }
 
 

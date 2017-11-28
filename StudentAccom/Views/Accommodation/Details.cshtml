@@ -17,7 +17,7 @@
 
 <body>
     <section name="Accommodation details" class="col-md-12">
-         <div class="col-md-7">
+        <div class="col-md-7">
             <h1><strong>@accom.Title</strong></h1>
             @if (Request.IsAuthenticated && User.IsInRole("Landlord") && currentUserId.Equals(accom.LandlordID)) {
                 <div>
@@ -35,7 +35,7 @@
                 <p><span class="field-name">Price: </span>&pound; @accom.Price</p>
                 <p><span class="field-name">Type of rent: </span>@accom.TypeRent</p>
                 <p><span class="field-name">Cleaning fee: </span>&pound; @accom.CleaningFee</p>
-                <p><span class="field-name">Security deposit: </span>&pound; @accom.SecurityDeposit</p>                
+                <p><span class="field-name">Security deposit: </span>&pound; @accom.SecurityDeposit</p>
             </div>
 
             <div class="col-md-12 body-margin" title="Additional features in the accommodation">
@@ -43,7 +43,7 @@
                 @if (@accom.Internet) {
                     <div class="col-md-4">
                         <p><span><img src="~/Images/internet-icon.png" alt="Internet icon" />   Internet</span></p>
-                     </div>
+                    </div>
                 }
                 @if (@accom.Wifi) {
                     <div class="col-md-4">
@@ -51,7 +51,7 @@
                     </div>
                 }
                 @if (@accom.CableTV) {
-                   <div class="col-md-4">
+                    <div class="col-md-4">
                         <p><span><img src="~/Images/cable-tv-icon.png" alt="Cable TV icon" />   Cable TV</span></p>
                     </div>
                 }
@@ -110,87 +110,90 @@
                         <p><span><img src="~/Images/gym-icon.png" alt="Gym icon" />   Gym</span></p>
                     </div>
                 }
-             </div>
+            </div>
 
-             <div class="col-md-12 body-margin" title="Permitted items and activities">
-                 <h2>Permitted items and activitiess</h2>
-                 @if (@accom.Smoking) {
-                     <div class="col-md-4">
-                         <p><span><img src="~/Images/smoking-icon.png" alt="Smoking icon" />   Smoking</span></p>
-                     </div>
-                 }
-                 @if (@accom.Parties) {
-                     <div class="col-md-4">
-                         <p><span><img src="~/Images/party-icon.png" alt="Parties icon" />   Parties</span></p>
-                     </div>
-                 }
-                 @if (@accom.Pets) {
-                     <div class="col-md-4">
-                         <p><span><img src="~/Images/pets-icon.png" alt="Pets icon" />   Pets</span></p>
-                     </div>
-                 }
-                 @if (@accom.CommercialActivities) {
-                     <div class="col-md-4">
-                         <p><span><img src="~/Images/commercial-activities-icon.png" alt="Commercial activities icon" />   Commercial activities</span></p>
-                     </div>
-                 }
-             </div>
+            <div class="col-md-12 body-margin" title="Permitted items and activities">
+                <h2>Permitted items and activitiess</h2>
+                @if (@accom.Smoking) {
+                    <div class="col-md-4">
+                        <p><span><img src="~/Images/smoking-icon.png" alt="Smoking icon" />   Smoking</span></p>
+                    </div>
+                }
+                @if (@accom.Parties) {
+                    <div class="col-md-4">
+                        <p><span><img src="~/Images/party-icon.png" alt="Parties icon" />   Parties</span></p>
+                    </div>
+                }
+                @if (@accom.Pets) {
+                    <div class="col-md-4">
+                        <p><span><img src="~/Images/pets-icon.png" alt="Pets icon" />   Pets</span></p>
+                    </div>
+                }
+                @if (@accom.CommercialActivities) {
+                    <div class="col-md-4">
+                        <p><span><img src="~/Images/commercial-activities-icon.png" alt="Commercial activities icon" />   Commercial activities</span></p>
+                    </div>
+                }
+            </div>
 
-             <div class="col-md-12 body-margin" title="Basic information about the accommodation">
-                 <h2>Landlord information</h2>
-                 <br />
-                 <p><span class="field-name">Name: </span>@landlordFullName</p>
-                 @if (landlordCompany != null && landlordCompany != "") {
-                     <p><span class="field-name">Company: </span> @landlordCompany</p>
-                 }
-                 <p><span class="field-name">Email: </span>@landlordEmail</p>
-                 @if (landlordPhoneNumber != null && landlordPhoneNumber != "") {
-                     <p><span class="field-name">Phone Number: </span>@landlordPhoneNumber</p>
-                 }
-             </div>
+            <div class="col-md-12 body-margin" title="Basic information about the accommodation">
+                <h2>Landlord information</h2>
+                <br />
+                <p><span class="field-name">Name: </span>@landlordFullName</p>
+                @if (landlordCompany != null && landlordCompany != "") {
+                    <p><span class="field-name">Company: </span> @landlordCompany</p>
+                }
+                <p><span class="field-name">Email: </span>@landlordEmail</p>
+                @if (landlordPhoneNumber != null && landlordPhoneNumber != "") {
+                    <p><span class="field-name">Phone Number: </span>@landlordPhoneNumber</p>
+                }
+            </div>
 
-            @if (Request.IsAuthenticated && User.IsInRole("AccommodationOfficer") && accom.Status == StudentAccom.Models.Status.UnderReview) {
-                <div class="col-md-12 generic-margin" title="Accommodation Officer Review">
-                    <h1 class="review">Accommodation Office Review</h1>
-                    <form action="../../Accommodation/Review" method="post">
-                        <div>
-                            <input hidden name="Accommodation_ID" value="@accom.ID" />
-                            <textarea class="form-control vresize" name="textAreaComment" id="textAreaComment" style="resize:none;" rows="10" placeholder="Advertisement Review"></textarea>
-                            <br />
-                            <input name="btnReview" class="btn btn-danger" type="submit" value="Reject" />
-                            <input name="btnReview" class="btn btn-success" type="submit" value="Approve" />
-                        </div>
-                    </form>                    
-                </div>
-            } else if (Request.IsAuthenticated && User.IsInRole("AccommodationOfficer") && accom.Status != StudentAccom.Models.Status.UnderReview) {
-                <div class="col-md-12 generic-margin" title="Accommodation Officer Review">
-                    <h1 class="review">Accommodation Office Review</h1>
-                    <p><b>Status: </b>@accom.Status</p>
-                    @if (accom.Comment != null && accom.Comment != ""){
-                        <b>Comment: </b>
-                        <p>@accom.Comment</p>
-                    } else {
-                        <p>The officer has not written a comment for this advertisement.</p>
-                    }
-
-                </div>
-             }
+            @if (Request.IsAuthenticated) {
+                if (User.IsInRole("AccommodationOfficer") && accom.Status == StudentAccom.Models.Status.UnderReview) {
+                    <div class="col-md-12 generic-margin" title="Accommodation Officer Review">
+                        <h1 class="review">Accommodation Office Review</h1>
+                        <form action="../../Accommodation/Review" method="post">
+                            <div>
+                                <input hidden name="Accommodation_ID" value="@accom.ID" />
+                                <textarea class="form-control vresize" name="textAreaComment" id="textAreaComment" style="resize:none;" rows="10" placeholder="Advertisement Review"></textarea>
+                                <br />
+                                <input name="btnReview" class="btn btn-danger" type="submit" value="Reject" />
+                                <input name="btnReview" class="btn btn-success" type="submit" value="Approve" />
+                            </div>
+                        </form>
+                    </div>
+                } else if (User.IsInRole("AccommodationOfficer")
+                     || (User.IsInRole("Landlord") && currentUserId.Equals(accom.LandlordID))
+                     && accom.Status != StudentAccom.Models.Status.UnderReview) {
+                    <div class="col-md-12 generic-margin" title="Accommodation Officer Review">
+                        <h1 class="review">Accommodation Office Review</h1>
+                        <p><b>Status: </b>@accom.Status</p>
+                        @if (accom.Comment != null && accom.Comment != "") {
+                            <b>Comment: </b>
+                            <p>@accom.Comment</p>
+                        } else {
+                            <p>The officer has not written a comment for this advertisement.</p>
+                        }
+                    </div>
+                }
+            }
         </div>
 
         <div class="body-margin col-md-5" title="Images">
             @if (accom.Images.Count > 1) {
                 <div id="details-carousel" class="carousel slide" data-ride="carousel">
-     <!--
-                    <ol class="carousel-indicators">
-                        @for (int i = 0; i < accom.Images.Count; i++) {
-                            if (i == 0) {
-                                <li data-target="#details-carousel" data-slide-to="i" class="active"></li>
-                            } else {
-                                <li data-target="#details-carousel" data-slide-to="i"></li>
-                            }
-                        }
-                    </ol> 
-    -->                
+                    <!--
+                                    <ol class="carousel-indicators">
+                                        @for (int i = 0; i < accom.Images.Count; i++) {
+                                            if (i == 0) {
+                                                <li data-target="#details-carousel" data-slide-to="i" class="active"></li>
+                                            } else {
+                                                <li data-target="#details-carousel" data-slide-to="i"></li>
+                                            }
+                                        }
+                                    </ol>
+                    -->
                     <div class="carousel-inner" role="listbox">
                         @foreach (var img in accom.Images) {
                             if (accom.Images.First() == img) {
@@ -205,7 +208,7 @@
                         }
                     </div>
                     <a class="left carousel-control" href="#details-carousel" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> 
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                     </a>
                     <a class="right carousel-control" href="#details-carousel" role="button" data-slide="next">

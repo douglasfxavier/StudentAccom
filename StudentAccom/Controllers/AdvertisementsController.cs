@@ -101,7 +101,7 @@ namespace StudentAccom.Controllers
 
 
 
-            //sorting the results
+            //Sorting the results
             switch (sortby) {
                 case "price_lowest":
                     accommodations = accommodations.OrderBy(a => a.Price);
@@ -114,7 +114,7 @@ namespace StudentAccom.Controllers
             }
 
 
-            //Avoinding Landlord users to have unauthorized access to the other landlords ads
+            //Selecting only the accommodation records related the landlord user who is logged in
             if (User.IsInRole("Landlord")) {
                 var userId = User.Identity.GetUserId();                
                 accommodations = accommodations.Where(a => a.LandlordID.Equals(userId));

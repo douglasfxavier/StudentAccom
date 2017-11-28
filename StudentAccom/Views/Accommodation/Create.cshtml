@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "New Accommodation Advertisement";
-    string LandlordID = (string) ViewData["LandlordID"];
+    string LandlordID = (string)ViewData["LandlordID"];
 }
 
 <!DOCTYPE html>
@@ -29,7 +29,7 @@
                     <div class="form-row">
                         <div class="form-group-lg col-lg-6">
                             <label for="inputTypeAccom">@Html.DisplayNameFor(model => model.TypeAccom)</label>
-                            @Html.EnumDropDownListFor( model => model.TypeAccom, new { @class = "form-control", @id = "inputTypeAccom", @placeholder = "Type of accomodation"  })
+                            @Html.EnumDropDownListFor(model => model.TypeAccom, new { @class = "form-control", @id = "inputTypeAccom", @placeholder = "Type of accomodation" })
                         </div>
                         <div class="form-group-lg col-lg-6">
                             <label for="inputLocation">@Html.DisplayNameFor(model => model.Location)</label>
@@ -67,12 +67,12 @@
                         </div>
                     </div>
                 </fieldset>
-               
+
                 <fieldset name="Additional features in the accommodation" class="form-group-lg col-lg-12">
                     <legend>Features</legend>
                     <div class="form-row">
                         <div class="form-group-lg col-lg-4">
-                            @Html.EditorFor(model => model.Internet, new { htmlAttributes = new { @class = "custom-control-input",  @id = "checkboxInternet" } })
+                            @Html.EditorFor(model => model.Internet, new { htmlAttributes = new { @class = "custom-control-input", @id = "checkboxInternet" } })
                             <label for="checkboxInternet">@Html.DisplayNameFor(model => model.Internet)</label>
                         </div>
                         <div class="form-group-lg col-lg-4">
@@ -167,14 +167,14 @@
                             <br />
                         </div>
                     </div>
-                    
+
                     <div class="form-row">
                         <div class="form-group-lg col-lg-12">
-                            
+
                             <input class="btn btn-default" type="reset" value="Clear" />
                             <input class="btn btn-primary" type="submit" value="Submit" />
                             <hr />
-                        </div>                        
+                        </div>
                     </div>
                 </fieldset>
             </div>
