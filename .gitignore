@@ -4,6 +4,7 @@
 /StudentAccom/bin/*
 /StudentAccom/obj/*
 /StudentAccom/App_Data/*
+/TestResults/*
 
 # Compiled source #
 *.com
